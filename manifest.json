@@ -1,0 +1,24 @@
+{
+  "name": "99 Allahovih Imena",
+  "short_name": "99 Imena",
+  "description": "Lokalna offline aplikacija za učenje 99 Allahovih Imena",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0d3c26",
+  "theme_color": "#0d3c26",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    },
+    {
+      "src": "icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "maskable"
+    }
+  ]
+}

@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0d3c26">
+  <meta name="description" content="Pregledna i moderna offline PWA aplikacija za učenje i razumijevanje 99 Allahovih Imena sa detaljnim objašnjenjima na bosanskom i njemačkom jeziku.">
+  <title>99 Allahovih Imena - Offline PWA</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/svg+xml" href="icon.svg">
+  <link rel="apple-touch-icon" href="icon.svg">
+
+  <style>
+    /* Google Fonts imported dynamically (will fall back gracefully to beautiful system fonts when offline) */
+    @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+    :root {
+      --primary-color: #0d3c26;
+      --primary-dark: #072215;
+      --primary-light: #165337;
+      --accent-color: #d4af37;
+      --accent-hover: #bda02a;
+      --accent-light: #f3e0aa;
+      --bg-color: #f7f6f2;
+      --card-bg: #ffffff;
+      --text-main: #1a2620;
+      --text-muted: #5e6f66;
+      --border-color: #e6e3da;
+      --shadow-sm: 0 2px 8px rgba(7, 34, 21, 0.04);
+      --shadow-md: 0 4px 20px rgba(7, 34, 21, 0.08);
+      --shadow-lg: 0 16px 32px rgba(7, 34, 21, 0.12);
+      --transition-fast: 0.2s ease;
+      --transition-normal: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Outfit', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: row;
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c5c2b9;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--accent-color);
+    }
+
+    /* Main Grid & Layout */
+    .app-container {
+      display: flex;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* Sidebar (Left list pane) */
+    .sidebar {
+      width: 35%;
+      min-width: 380px;
+      max-width: 450px;
+      background: var(--card-bg);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      z-index: 10;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sidebar-header {
+      padding: 24px;
+      border-bottom: 1px solid var(--border-color);
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+      color: #white;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .app-logo {
+      width: 36px;
+      height: 36px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    }
+
+    .app-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+    }
+
+    /* Language Switcher */
+    .lang-switcher {
+      display: flex;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 3px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .lang-btn {
+      background: transparent;
+      border: none;
+      color: rgba(255, 255, 255, 0.7);
+      padding: 6px 14px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+
+    .lang-btn.active {
+      background: var(--accent-color);
+      color: var(--primary-dark);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    /* Search Bar */
+    .search-wrapper {
+      position: relative;
+      width: 100%;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 16px 12px 42px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-family: inherit;
+      transition: var(--transition-fast);
+      outline: none;
+    }
+
+    .search-input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .search-input:focus {
+      background: rgba(255, 255, 255, 0.12);
+      border-color: var(--accent-color);
+      box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.25);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 18px;
+      height: 18px;
+      opacity: 0.6;
+      stroke: #ffffff;
+      fill: none;
+    }
+
+    /* Status Pill */
+    .status-container {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.75rem;
+      color: rgba(255, 255, 255, 0.8);
+      padding: 0 4px;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background-color: #2ec4b6;
+      border-radius: 50%;
+      box-shadow: 0 0 8px #2ec4b6;
+    }
+
+    /* Names Scroll Area */
+    .names-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background-color: #faf9f6;
+    }
+
+    .name-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .name-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--accent-color);
+      box-shadow: var(--shadow-md);
+      background-color: #fbfaf6;
+    }
+
+    .name-card.active {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      border-color: var(--accent-color);
+      color: #ffffff;
+      box-shadow: var(--shadow-md);
+    }
+
+    .name-card-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .name-number {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent-color);
+      background: rgba(212, 175, 55, 0.1);
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .name-card.active .name-number {
+      background: rgba(255, 255, 255, 0.15);
+      color: var(--accent-light);
+    }
+
+    .name-latin-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .name-transliteration {
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: -0.2px;
+    }
+
+    .name-meaning {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .name-card.active .name-meaning {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .name-arabic-short {
+      font-family: 'Amiri', 'Traditional Arabic', serif;
+      font-size: 1.45rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      direction: rtl;
+      flex-shrink: 0;
+    }
+
+    .name-card.active .name-arabic-short {
+      color: var(--accent-color);
+      text-shadow: 0 1px 4px rgba(0,0,0,0.3);
+    }
+
+    /* Detail View (Right Pane) */
+    .detail-pane {
+      flex: 1;
+      height: 100%;
+      background: var(--bg-color);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Welcome / Empty State */
+    .welcome-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      padding: 40px;
+      text-align: center;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .welcome-pattern {
+      width: 120px;
+      height: 120px;
+      margin-bottom: 24px;
+      opacity: 0.35;
+      color: var(--primary-color);
+    }
+
+    .welcome-title {
+      font-size: 1.8rem;
+      font-weight: 800;
+      color: var(--primary-color);
+      margin-bottom: 12px;
+    }
+
+    .welcome-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Detailed View State */
+    .detail-container {
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      max-width: 800px;
+      margin: 0 auto;
+      width: 100%;
+      opacity: 0;
+      transform: translateY(15px);
+      animation: fadeInUp var(--transition-normal) forwards;
+    }
+
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .detail-card-main {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 40px;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .detail-card-main::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--primary-color));
+    }
+
+    .detail-arabic-circle {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      border: 3px double var(--accent-color);
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+      margin: 0 auto 28px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-md);
+      position: relative;
+    }
+
+    .detail-arabic-circle::after {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: -8px;
+      right: -8px;
+      bottom: -8px;
+      border-radius: 50%;
+      border: 1px solid var(--accent-color);
+      opacity: 0.35;
+    }
+
+    .detail-arabic-text {
+      font-family: 'Amiri', 'Traditional Arabic', serif;
+      font-size: 4rem;
+      color: var(--accent-color);
+      direction: rtl;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .detail-number {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--accent-color);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .detail-transliteration {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-bottom: 12px;
+    }
+
+    .detail-divider {
+      width: 60px;
+      height: 2px;
+      background: var(--accent-color);
+      margin: 16px auto;
+      border-radius: 1px;
+    }
+
+    .detail-translation {
+      font-size: 1.4rem;
+      font-weight: 500;
+      color: var(--primary-color);
+    }
+
+    /* Explanation Section */
+    .detail-section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--primary-color);
+      border-bottom: 2px solid var(--border-color);
+      padding-bottom: 8px;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .detail-section-title::before {
+      content: '';
+      display: inline-block;
+      width: 6px;
+      height: 14px;
+      background-color: var(--accent-color);
+      border-radius: 3px;
+    }
+
+    .detail-explanation-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 18px;
+      padding: 32px;
+      box-shadow: var(--shadow-sm);
+      line-height: 1.75;
+      font-size: 1.05rem;
+      color: var(--text-main);
+      text-align: justify;
+    }
+
+    /* Mobile Back Button (Overlay header) */
+    .mobile-nav-header {
+      display: none;
+      padding: 16px 20px;
+      background: var(--card-bg);
+      border-bottom: 1px solid var(--border-color);
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 12;
+      width: 100%;
+    }
+
+    .back-button {
+      background: none;
+      border: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary-color);
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .back-icon {
+      width: 20px;
+      height: 20px;
+      stroke: var(--primary-color);
+      stroke-width: 2.5;
+      fill: none;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        max-width: none;
+        min-width: 0;
+        height: 100%;
+      }
+
+      .sidebar-header {
+        padding: 20px 16px;
+      }
+
+      /* Detail View becomes fullscreen overlay */
+      .detail-pane {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 100;
+        transform: translateY(100%);
+        transition: transform var(--transition-normal);
+        display: flex;
+        flex-direction: column;
+        background: var(--bg-color);
+      }
+
+      .detail-pane.active {
+        transform: translateY(0);
+      }
+
+      .mobile-nav-header {
+        display: flex;
+      }
+
+      .detail-container {
+        padding: 24px 16px 40px 16px;
+        gap: 24px;
+        overflow-y: auto;
+      }
+
+      .detail-card-main {
+        padding: 28px 16px;
+      }
+
+      .detail-arabic-circle {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 20px;
+      }
+
+      .detail-arabic-text {
+        font-size: 3.2rem;
+      }
+
+      .detail-transliteration {
+        font-size: 1.8rem;
+      }
+
+      .detail-translation {
+        font-size: 1.2rem;
+      }
+
+      .detail-explanation-card {
+        padding: 20px;
+        font-size: 0.95rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Sidebar Area -->
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="header-top">
+          <div class="logo-title">
+            <svg class="app-logo" viewBox="0 0 512 512">
+              <!-- Inline SVG mirroring icon.svg background and calligraphy -->
+              <rect width="512" height="512" rx="112" fill="#0d3c26" />
+              <circle cx="256" cy="256" r="190" fill="none" stroke="#d4af37" stroke-width="20" />
+              <text x="256" y="320" font-family="Amiri, serif" font-size="220" font-weight="bold" fill="#d4af37" text-anchor="middle">الله</text>
+            </svg>
+            <h1 class="app-title" id="app-ui-title">99 Allahovih Imena</h1>
+          </div>
+          
+          <div class="lang-switcher">
+            <button class="lang-btn active" onclick="switchLanguage('bs')">BS</button>
+            <button class="lang-btn" onclick="switchLanguage('de')">DE</button>
+          </div>
+        </div>
+
+        <div class="search-wrapper">
+          <svg class="search-icon" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8" stroke-width="2.5" stroke-linecap="round"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65" stroke-width="2.5" stroke-linecap="round"></line>
+          </svg>
+          <input type="text" class="search-input" id="search-input" placeholder="Pretraži imena..." onkeyup="filterNames()">
+        </div>
+
+        <div class="status-container">
+          <div class="status-dot"></div>
+          <span id="app-ui-offline">Offline rad spreman</span>
+        </div>
+      </div>
+
+      <!-- Scrollable Names List -->
+      <div class="names-list" id="names-list">
+        <!-- Rendered dynamically -->
+      </div>
+    </aside>
+
+    <!-- Detail View Area -->
+    <main class="detail-pane" id="detail-pane">
+      <!-- Mobile Close Navigation -->
+      <div class="mobile-nav-header">
+        <button class="back-button" onclick="closeDetailMobile()">
+          <svg class="back-icon" viewBox="0 0 24 24">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+          </svg>
+          <span id="app-ui-back">Nazad</span>
+        </button>
+      </div>
+
+      <div class="detail-pane-content" style="flex: 1; display: flex; flex-direction: column;" id="detail-pane-content">
+        <!-- Default State: Welcome Message -->
+        <div class="welcome-container" id="welcome-container">
+          <svg class="welcome-pattern" viewBox="0 0 512 512" fill="none" stroke="currentColor" stroke-width="6">
+            <rect x="136" y="136" width="240" height="240" stroke-width="10"/>
+            <rect x="136" y="136" width="240" height="240" transform="rotate(45 256 256)" stroke-width="10"/>
+            <circle cx="256" cy="256" r="120" stroke-dasharray="8 8"/>
+            <circle cx="256" cy="256" r="40" fill="currentColor"/>
+          </svg>
+          <h2 class="welcome-title" id="welcome-title">Bismillahir-Rahmanir-Rahim</h2>
+          <p class="welcome-subtitle" id="welcome-subtitle">
+            Odaberite Allahovo ime sa lijeve strane kako biste vidjeli detaljan prevod i opširno pojašnjenje.
+          </p>
+        </div>
+
+        <!-- Populated State: Name Details -->
+        <div class="detail-container" id="detail-container" style="display: none;">
+          <div class="detail-card-main">
+            <div class="detail-number" id="detail-num">IME 01</div>
+            <div class="detail-arabic-circle">
+              <span class="detail-arabic-text" id="detail-arabic">الرَّحْمَنُ</span>
+            </div>
+            <h2 class="detail-transliteration" id="detail-translit">Ar-Rahman</h2>
+            <div class="detail-divider"></div>
+            <p class="detail-translation" id="detail-trans">Svemilosni</p>
+          </div>
+
+          <div class="explanation-box">
+            <h3 class="detail-section-title" id="detail-section-exp-title">Opširno pojašnjenje</h3>
+            <div class="detail-explanation-card" id="detail-explanation">
+              Učitavanje...
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // State variables
+    let allNames = [];
+    let currentLang = 'bs';
+    let selectedNameId = null;
+
+    // Translations Dictionary
+    const uiStrings = {
+      bs: {
+        appTitle: "99 Allahovih Imena",
+        searchPlaceholder: "Pretraži imena...",
+        offlineReady: "Offline rad spreman",
+        backBtn: "Nazad",
+        welcomeTitle: "Bismillahir-Rahmanir-Rahim",
+        welcomeSubtitle: "Odaberite Allahovo ime sa liste kako biste pročitali značenje i pojašnjenje.",
+        explanationTitle: "Opširno pojašnjenje",
+        emptyExplanation: "Pojašnjenje za ovo ime trenutno se priprema. Pritisnite dugme u gornjem desnom uglu da biste dopunili bazu.",
+        meaningPlaceholder: "Značenje se priprema"
+      },
+      de: {
+        appTitle: "99 Namen Allahs",
+        searchPlaceholder: "Namen suchen...",
+        offlineReady: "Offline-Modus bereit",
+        backBtn: "Zurück",
+        welcomeTitle: "Bismillahir-Rahmanir-Rahim",
+        welcomeSubtitle: "Wählen Sie einen Namen aus der Liste aus, um die Bedeutung und Erklärung anzuzeigen.",
+        explanationTitle: "Ausführliche Erklärung",
+        emptyExplanation: "Die Erklärung für diesen Namen wird derzeit vorbereitet. Sie können die JSON-Datei bearbeiten, um Übersetzungen hinzuzufügen.",
+        meaningPlaceholder: "Bedeutung wird vorbereitet"
+      }
+    };
+
+    // Initialize application
+    window.addEventListener('DOMContentLoaded', () => {
+      loadNamesData();
+      registerServiceWorker();
+    });
+
+    // Load data from names.json
+    function loadNamesData() {
+      fetch('./names.json')
+        .then(response => {
+          if (!response.ok) {
+            throw new Error("Greška pri učitavanju baze podataka.");
+          }
+          return response.json();
+        })
+        .then(data => {
+          allNames = data;
+          renderNamesList();
+        })
+        .catch(err => {
+          console.error(err);
+          document.getElementById('names-list').innerHTML = `
+            <div style="padding: 20px; text-align: center; color: var(--primary-dark); font-weight: 500;">
+              Dogodila se greška prilikom učitavanja imena. Molimo provjerite names.json datoteku.
+            </div>`;
+        });
+    }
+
+    // Render list items
+    function renderNamesList(filterQuery = "") {
+      const listContainer = document.getElementById('names-list');
+      listContainer.innerHTML = "";
+
+      const query = filterQuery.toLowerCase().trim();
+
+      const filtered = allNames.filter(name => {
+        if (!query) return true;
+        const mainTrans = name.transliteration.toLowerCase();
+        const mainArabic = name.arabic;
+        const translation = name[currentLang].translation.toLowerCase();
+        
+        return mainTrans.includes(query) || 
+               translation.includes(query) || 
+               mainArabic.includes(query) ||
+               name.id.toString() === query;
+      });
+
+      if (filtered.length === 0) {
+        listContainer.innerHTML = `
+          <div style="padding: 30px; text-align: center; color: var(--text-muted); font-size: 0.95rem;">
+            Nema rezultata za pretragu.
+          </div>`;
+        return;
+      }
+
+      filtered.forEach(name => {
+        const isActive = name.id === selectedNameId;
+        const meaning = name[currentLang].translation || uiStrings[currentLang].meaningPlaceholder;
+        
+        const card = document.createElement('div');
+        card.className = `name-card ${isActive ? 'active' : ''}`;
+        card.setAttribute('onclick', `selectName(${name.id})`);
+        card.innerHTML = `
+          <div class="name-card-left">
+            <span class="name-number">${String(name.id).padStart(2, '0')}</span>
+            <div class="name-latin-info">
+              <span class="name-transliteration">${name.transliteration}</span>
+              <span class="name-meaning">${meaning}</span>
+            </div>
+          </div>
+          <span class="name-arabic-short">${name.arabic}</span>
+        `;
+        listContainer.appendChild(card);
+      });
+    }
+
+    // Handle name selection
+    function selectName(id) {
+      selectedNameId = id;
+      
+      // Update active styling in sidebar
+      const cards = document.querySelectorAll('.name-card');
+      cards.forEach(c => c.classList.remove('active'));
+      
+      // Find the card and add active class
+      const listContainer = document.getElementById('names-list');
+      const filteredIndex = allNames.findIndex(n => n.id === id);
+      // Re-rendering is safer to keep active state inline with list filters
+      renderNamesList(document.getElementById('search-input').value);
+
+      // Fetch name data
+      const nameData = allNames.find(n => n.id === id);
+      if (!nameData) return;
+
+      // Update Detail Pane
+      document.getElementById('welcome-container').style.display = 'none';
+      
+      const detailContainer = document.getElementById('detail-container');
+      detailContainer.style.display = 'flex';
+      
+      // Reset animation
+      detailContainer.style.animation = 'none';
+      detailContainer.offsetHeight; /* trigger reflow */
+      detailContainer.style.animation = 'fadeInUp var(--transition-normal) forwards';
+
+      // Set content
+      document.getElementById('detail-num').innerText = `IME ${String(nameData.id).padStart(2, '0')} / 99`;
+      document.getElementById('detail-arabic').innerText = nameData.arabic;
+      document.getElementById('detail-translit').innerText = nameData.transliteration;
+      
+      const translation = nameData[currentLang].translation || uiStrings[currentLang].meaningPlaceholder;
+      document.getElementById('detail-trans').innerText = translation;
+
+      const explanation = nameData[currentLang].explanation || uiStrings[currentLang].emptyExplanation;
+      document.getElementById('detail-explanation').innerText = explanation;
+
+      // Mobile Handling: open overlay
+      const detailPane = document.getElementById('detail-pane');
+      detailPane.classList.add('active');
+    }
+
+    // Close Mobile Overlay
+    function closeDetailMobile() {
+      const detailPane = document.getElementById('detail-pane');
+      detailPane.classList.remove('active');
+      
+      // Deselect item in desktop mode if screen resized, but keep state
+    }
+
+    // Toggle Language
+    function switchLanguage(lang) {
+      if (lang === currentLang) return;
+      
+      currentLang = lang;
+
+      // Toggle Active buttons
+      const buttons = document.querySelectorAll('.lang-btn');
+      buttons.forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+
+      // Update UI texts
+      document.getElementById('app-ui-title').innerText = uiStrings[currentLang].appTitle;
+      document.getElementById('search-input').placeholder = uiStrings[currentLang].searchPlaceholder;
+      document.getElementById('app-ui-offline').innerText = uiStrings[currentLang].offlineReady;
+      document.getElementById('app-ui-back').innerText = uiStrings[currentLang].backBtn;
+      
+      document.getElementById('welcome-title').innerText = uiStrings[currentLang].welcomeTitle;
+      document.getElementById('welcome-subtitle').innerText = uiStrings[currentLang].welcomeSubtitle;
+      document.getElementById('detail-section-exp-title').innerText = uiStrings[currentLang].explanationTitle;
+
+      // Re-render sidebar list
+      const searchQuery = document.getElementById('search-input').value;
+      renderNamesList(searchQuery);
+
+      // Re-render details if active
+      if (selectedNameId !== null) {
+        selectName(selectedNameId);
+      }
+    }
+
+    // Filter list items based on search input
+    function filterNames() {
+      const query = document.getElementById('search-input').value;
+      renderNamesList(query);
+    }
+
+    // Register Service Worker for PWA Offline Caching
+    function registerServiceWorker() {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('./sw.js')
+          .then((reg) => {
+            console.log('[Service Worker] Registrovan uspješno sa scopom:', reg.scope);
+          })
+          .catch((err) => {
+            console.error('[Service Worker] Registracija neuspješna:', err);
+          });
+      }
+    }
+  </script>
+</body>
+</html>
