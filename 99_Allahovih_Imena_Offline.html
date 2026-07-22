@@ -703,1302 +703,1294 @@
   <script>
     // Embedded JSON database containing all 99 names
     const allNames = [
-      {
-        "id": 1,
-        "arabic": "الرَّحْمَنُ",
-        "transliteration": "Ar-Rahman",
-        "bs": {
-          "translation": "Svemilosni",
-          "explanation": "Onaj čija milost obuhvata sve stvoreno na ovome svijetu. Njegovo milosrđe nije ograničeno i pruža se svim bićima, bez obzira na njihova djela ili vjerovanje. Ova milost je opća i odnosi se na održavanje života, opskrbu i sve blagodati u kojima uživaju sva stvorenja."
-        },
-        "de": {
-          "translation": "Der Allerbarmer",
-          "explanation": "Derjenige, dessen Barmherzigkeit alles Erschaffene in dieser Welt umfasst. Seine Gnade ist grenzenlos und gilt für alle Geschöpfe, unabhängig von ihren Taten oder ihrem Glauben. Diese allgemeine Barmherzigkeit zeigt sich in der Aufrechterhaltung des Lebens, der Versorgung und allen Segnungen, die die Schöpfung erfährt."
-        }
-      },
-      {
-        "id": 2,
-        "arabic": "الرَّحِيمُ",
-        "transliteration": "Ar-Rahim",
-        "bs": {
-          "translation": "Samilosni",
-          "explanation": "Onaj koji je posebno milostiv prema vjernicima, naročito na drugom svijetu (Ahiretu). Dok je Ar-Rahman opća milost prema svima, Ar-Rahim je posebna, trajna milost namijenjena onima koji vjeruju i čine dobro. Ova milost vodi vjernike ka spasu i Džennetu."
-        },
-        "de": {
-          "translation": "Der Barmherzige",
-          "explanation": "Derjenige, der den Gläubigen gegenüber besonders barmherzig ist, insbesondere im Jenseits (Achira). Während Ar-Rahman die allgemeine Gnade für alle beschreibt, ist Ar-Rahim eine spezielle, dauerhafte Barmherzigkeit, die für diejenigen bestimmt ist, die glauben und Gutes tun."
-        }
-      },
-      {
-        "id": 3,
-        "arabic": "المَلِكُ",
-        "transliteration": "Al-Malik",
-        "bs": {
-          "translation": "Vladar",
-          "explanation": "Istinski vladar, Suveren i gospodar svega postojećeg. Njegova vlast je apsolutna, trajna i neograničena. Zemaljski vladari imaju privremenu i ograničenu moć, dok je On jedini stvarni posjednik cijelog univerzuma i sve što postoji podređeno je Njegovoj volji."
-        },
-        "de": {
-          "translation": "Der König",
-          "explanation": "Der wahre Herrscher, Souverän und Besitzer von allem, was existiert. Seine Herrschaft ist absolut, dauerhaft und unbegrenzt. Irdische Herrscher besitzen nur temporäre und begrenzte Macht, während Er der einzig wahre Besitzer des Universums ist."
-        }
-      },
-      {
-        "id": 4,
-        "arabic": "القُdُّوسُ",
-        "arabic_styled": "القُدُّوسُ",
-        "arabic": "القُدُّوسُ",
-        "transliteration": "Al-Quddus",
-        "bs": {
-          "translation": "Sveti / Čisti",
-          "explanation": "Onaj koji je čist od svakog nedostatka, nesavršenstva ili greške. Njegova suština je potpuno sveta i uzvišena iznad onoga što Mu se pripisuje od nesavršenosti. On je dostojan svake hvale i čistote."
-        },
-        "de": {
-          "translation": "Der Heilige / Der Reine",
-          "explanation": "Der Reine, der frei von jeglichem Mangel, Makel oder Fehler ist. Sein Wesen ist heilig und erhaben über alle Unzulänglichkeiten, die Ihm zugeschrieben werden könnten. Er ist des vollkommenen Lobes würdig."
-        }
-      },
-      {
-        "id": 5,
-        "arabic": "السَّلَامُ",
-        "transliteration": "As-Salam",
-        "bs": {
-          "translation": "Izvor mira / Spasitelj",
-          "explanation": "Onaj koji je čist od svih mahana i nedostataka, i koji svojim stvorenjima daruje mir, sigurnost i spasenje od svake nevolje."
-        },
-        "de": {
-          "translation": "Der Friede / Der Retter",
-          "explanation": "Derjenige, der frei von allen Mängeln ist und Seinen Geschöpfen Frieden, Sicherheit und Errettung vor Unheil schenkt."
-        }
-      },
-      {
-        "id": 6,
-        "arabic": "المُؤْمِنُ",
-        "transliteration": "Al-Mu'min",
-        "bs": {
-          "translation": "Čuvar vjere i sigurnosti",
-          "explanation": "Onaj koji ulijeva sigurnost u srca onih koji traže utočište i koji potvrđuje istinitost obećanja datog Svojim robovima."
-        },
-        "de": {
-          "translation": "Der Verleiher der Sicherheit",
-          "explanation": "Derjenige, der den Herzen Sicherheit schenkt und die Wahrheit Seiner Versprechen gegenüber Seinen Dienern bestätigt."
-        }
-      },
-      {
-        "id": 7,
-        "arabic": "المُهَيْمِنُ",
-        "transliteration": "Al-Muhaymin",
-        "bs": {
-          "translation": "Zaštitnik / Bdileći",
-          "explanation": "Onaj koji motri nad svim stvorenjima, nadgleda njihova djela, određuje im nafaku i čuva ih od svake nepravde."
-        },
-        "de": {
-          "translation": "Der Wächter / Der Beherrscher",
-          "explanation": "Derjenige, der über alle Geschöpfe wacht, ihre Taten beaufsichtigt, ihre Versorgung bestimmt und sie behütet."
-        }
-      },
-      {
-        "id": 8,
-        "arabic": "العَزِيزُ",
-        "transliteration": "Al-Aziz",
-        "bs": {
-          "translation": "Silni / Nadmoćni",
-          "explanation": "Nepobjedivi Vladar čijoj se snazi i moći niko ne može suprotstaviti, a koji posjeduje apsolutno dostojanstvo."
-        },
-        "de": {
-          "translation": "Der Allmächtige",
-          "explanation": "Der unbesiegbare Herrscher, dessen Macht niemand widerstehen kann und der absolute Würde besitzt."
-        }
-      },
-      {
-        "id": 9,
-        "arabic": "الجَبَّارُ",
-        "transliteration": "Al-Jabbar",
-        "bs": {
-          "translation": "Prislilitelj / Popravitelj",
-          "explanation": "Onaj čijoj se volji sve pokorava, ali i Onaj koji liječi slomljena srca i popravlja stanje Svojih stvorenja."
-        },
-        "de": {
-          "translation": "Der Unterwerfer / Der Heiler",
-          "explanation": "Derjenige, dessen Willen sich alles beugt, aber auch derjenige, der gebrochene Herzen heilt und Zustände verbessert."
-        }
-      },
-      {
-        "id": 10,
-        "arabic": "المُتَكَبِّرُ",
-        "transliteration": "Al-Mutakabbir",
-        "bs": {
-          "translation": "Uzvišeni / Gordi",
-          "explanation": "Jedini koji ima pravo na veličinu i uzvišenost, potpuno čist od svih osobina stvorenja i njihovih slabosti."
-        },
-        "de": {
-          "translation": "Der Erhabene / Der Stolze",
-          "explanation": "Der Einzige, der das Recht auf wahre Größe besitzt, weit erhaben über die Eigenschaften und Schwächen der Schöpfung."
-        }
-      },
-      {
-        "id": 11,
-        "arabic": "الخَالِقُ",
-        "transliteration": "Al-Khaliq",
-        "bs": {
-          "translation": "Stvoritelj",
-          "explanation": "Onaj koji stvara sve iz ničega, određujući mjeru, svojstva i sudbinu svakog stvorenja prije nego što ono nastane."
-        },
-        "de": {
-          "translation": "Der Schöpfer",
-          "explanation": "Derjenige, der alles aus dem Nichts erschafft und das Maß, die Eigenschaften und das Schicksal jedes Geschöpfs festlegt."
-        }
-      },
-      {
-        "id": 12,
-        "arabic": "البَارِئُ",
-        "transliteration": "Al-Bari'",
-        "bs": {
-          "translation": "Onaj koji stvara iz ničega",
-          "explanation": "Onaj koji stvara bića bez ikakvog prethodnog primjera ili šablona, savršeno usklađujući sve dijelove stvorenog."
-        },
-        "de": {
-          "translation": "Der Erschaffer aus dem Nichts",
-          "explanation": "Derjenige, der die Geschöpfe ohne Vorbild erschafft und alle Teile des Erschaffenen perfekt aufeinander abstimmt."
-        }
-      },
-      {
-        "id": 13,
-        "arabic": "المُصَوِّرُ",
-        "transliteration": "Al-Musawwir",
-        "bs": {
-          "translation": "Oblikovatelj / Darovalac lika",
-          "explanation": "Onaj koji svakom stvorenju daje jedinstven i specifičan oblik, izgled i prepoznatljive karakteristike."
-        },
-        "de": {
-          "translation": "Der Gestalter",
-          "explanation": "Derjenige, der jedem Geschöpf seine einzigartige und spezifische Form, Gestalt und Merkmale verleiht."
-        }
-      },
-      {
-        "id": 14,
-        "arabic": "الغَفَّارُ",
-        "transliteration": "Al-Ghaffar",
-        "bs": {
-          "translation": "Svepraštajući",
-          "explanation": "Onaj koji konstantno i iznova prašta grijehe Svojih robova, prikrivajući njihove sramote i nedostatke."
-        },
-        "de": {
-          "translation": "Der Allverzeihende",
-          "explanation": "Derjenige, der Seinen Dienern immer wieder vergibt, ihre Sünden zudeckt und ihre Fehler verbirgt."
-        }
-      },
-      {
-        "id": 15,
-        "arabic": "القَهَّارُ",
-        "transliteration": "Al-Qahhar",
-        "bs": {
-          "translation": "Nadvladavajući",
-          "explanation": "Onaj koji posjeduje apsolutnu moć da nadvlada sve otpore i kome je sve u svemiru potpuno pokoreno."
-        },
-        "de": {
-          "translation": "Der Bezwinger",
-          "explanation": "Derjenige, der die absolute Macht besitzt, jeden Widerstand zu brechen, und dem sich alles im Universum fügt."
-        }
-      },
-      {
-        "id": 16,
-        "arabic": "الوَهَّابُ",
-        "transliteration": "Al-Wahhab",
-        "bs": {
-          "translation": "Darovalac / Koji obilno poklanja",
-          "explanation": "Onaj koji neprestano i bez traženja protuusluge daruje Svoja stvorenja bezbrojnim blagodatima."
-        },
-        "de": {
-          "translation": "Der Geber / Der Schenkende",
-          "explanation": "Derjenige, der Seinen Geschöpfen fortlaufend und ohne Gegenleistung unzählige Segnungen schenkt."
-        }
-      },
-      {
-        "id": 17,
-        "arabic": "الرَّزَّاقُ",
-        "transliteration": "Ar-Razzaq",
-        "bs": {
-          "translation": "Opskrbitelj",
-          "explanation": "Onaj koji je preuzeo na Sebe obavezu da opskrbi svako živo biće hranom, zdravljem i svim potrebnim za život."
-        },
-        "de": {
-          "translation": "Der Versorger",
-          "explanation": "Derjenige, der es auf Sich genommen hat, jedes Lebewesen mit Nahrung, Gesundheit und allem Lebensnotwendigen zu versorgen."
-        }
-      },
-      {
-        "id": 18,
-        "arabic": "الفَتَّاحُ",
-        "transliteration": "Al-Fattah",
-        "bs": {
-          "translation": "Onaj koji otvara / Sudac",
-          "explanation": "Onaj koji otvara vrata milosti, uspjeha i znanja, te pravedno presuđuje među Svojim stvorenjima."
-        },
-        "de": {
-          "translation": "Der Öffner / Der Richter",
-          "explanation": "Derjenige, der die Tore der Barmherzigkeit, des Erfolgs und des Wissens öffnet und gerecht urteilt."
-        }
-      },
-      {
-        "id": 19,
-        "arabic": "العَلِيمُ",
-        "transliteration": "Al-Alim",
-        "bs": {
-          "translation": "Sveznajući",
-          "explanation": "Onaj čije znanje obuhvata sve što je bilo, što jeste i što će biti, do najsitnijih detalja i misli u srcima."
-        },
-        "de": {
-          "translation": "Der Allwissende",
-          "explanation": "Derjenige, dessen Wissen alles Vergangene, Gegenwärtige und Zukünftige umfasst, bis hin zu den geheimsten Gedanken."
-        }
-      },
-      {
-        "id": 20,
-        "arabic": "القَابِضُ",
-        "transliteration": "Al-Qabid",
-        "bs": {
-          "translation": "Onaj koji steže / Uskraćuje",
-          "explanation": "Onaj koji po Svojoj mudrosti uskraćuje opskrbu, steže srca ili uzima duše u času smrti."
-        },
-        "de": {
-          "translation": "Der die Gaben verknappt",
-          "explanation": "Derjenige, der nach Seiner Weisheit die Versorgung einschränkt, Herzen verengt oder Seelen im Moment des Todes nimmt."
-        }
-      },
-      {
-        "id": 21,
-        "arabic": "البَاسِطُ",
-        "transliteration": "Al-Basit",
-        "bs": {
-          "translation": "Onaj koji pruža / Širi",
-          "explanation": "Onaj koji obilno dijeli opskrbu, raduje srca i širi Svoju milost kome On hoće."
-        },
-        "de": {
-          "translation": "Der die Gaben reichlich gibt",
-          "explanation": "Derjenige, der die Versorgung großzügig verteilt, Herzen erfreut und Seine Barmherzigkeit ausdehnt."
-        }
-      },
-      {
-        "id": 22,
-        "arabic": "الخَافِضُ",
-        "transliteration": "Al-Khafid",
-        "bs": {
-          "translation": "Onaj koji spušta / Ponižava",
-          "explanation": "Onaj koji spušta i uništava ohole nasilnike i nevjernike, umanjujući njihov značaj."
-        },
-        "de": {
-          "translation": "Der Erniedriger",
-          "explanation": "Derjenige, der die hochmütigen Tyrannen und Ungläubigen erniedrigt und ihre Macht bricht."
-        }
-      },
-      {
-        "id": 23,
-        "arabic": "الرَّافِعُ",
-        "transliteration": "Al-Rafi'",
-        "bs": {
-          "translation": "Onaj koji uzdiže",
-          "explanation": "Onaj koji uzdiže položaj Svojih iskrenih robova, vjernika i učenih, kako na ovom tako i na budućem svijetu."
-        },
-        "de": {
-          "translation": "Der Erhöher",
-          "explanation": "Derjenige, der den Status Seiner aufrichtigen Diener, der Gläubigen und Gelehrten, im Diesseits und Jenseits erhöht."
-        }
-      },
-      {
-        "id": 24,
-        "arabic": "المُعِزُّ",
-        "transliteration": "Al-Mu'izz",
-        "bs": {
-          "translation": "Onaj koji daje čast",
-          "explanation": "Onaj koji daruje snagu, ugled i dostojanstvo onima koji se pokoravaju Njegovim zakonskim propisima."
-        },
-        "de": {
-          "translation": "Der Verleiher der Ehre",
-          "explanation": "Derjenige, der denjenigen Stärke, Ansehen und Würde verleiht, die Seinen Gesetzen folgen."
-        }
-      },
-      {
-        "id": 25,
-        "arabic": "المُذِلُّ",
-        "transliteration": "Al-Mudhill",
-        "bs": {
-          "translation": "Onaj koji ponižava",
-          "explanation": "Onaj koji uskraćuje Svoju pomoć onima koji se ohole, ostavljajući ih u poniženju i sramoti."
-        },
-        "de": {
-          "translation": "Der Erniedriger / Der Poniütiger",
-          "explanation": "Derjenige, der den Hochmütigen Seine Hilfe verwehrt und sie in Schande und Erniedrigung zurücklässt."
-        }
-      },
-      {
-        "id": 26,
-        "arabic": "السَّمِيعُ",
-        "transliteration": "As-Sami'",
-        "bs": {
-          "translation": "Svečujući",
-          "explanation": "Onaj koji čuje apsolutno sve glasove, šaputanja i molitve, bez obzira na jezik, daljinu ili glasnost."
-        },
-        "de": {
-          "translation": "Der Allhörende",
-          "explanation": "Derjenige, der absolut alle Stimmen, Flüstern und Gebete hört, unabhängig von Sprache, Entfernung oder Lautstärke."
-        }
-      },
-      {
-        "id": 27,
-        "arabic": "البَصِيرُ",
-        "transliteration": "Al-Basir",
-        "bs": {
-          "translation": "Svevideći",
-          "explanation": "Onaj koji vidi sve što postoji, pa čak i crnog mrava na crnoj stijeni u najtamnijoj noći."
-        },
-        "de": {
-          "translation": "Der Allsehende",
-          "explanation": "Derjenige, der alles Existierende sieht, selbst eine schwarze Ameise auf einem schwarzen Stein in dunkelster Nacht."
-        }
-      },
-      {
-        "id": 28,
-        "arabic": "الحَكَمُ",
-        "transliteration": "Al-Hakam",
-        "bs": {
-          "translation": "Sudac",
-          "explanation": "Apsolutni i pravedni Sudac čija je presuda konačna i čijoj odluci nema prigovora."
-        },
-        "de": {
-          "translation": "Der Richter",
-          "explanation": "Der absolute und gerechte Richter, dessen Urteil endgültig ist und dessen Entscheidung niemand anfechten kann."
-        }
-      },
-      {
-        "id": 29,
-        "arabic": "العَدْلُ",
-        "transliteration": "Al-Adl",
-        "bs": {
-          "translation": "Pravedni",
-          "explanation": "Onaj koji posjeduje savršenu pravdu, ne čini nepravdu nikome i sve postavlja na njegovo odgovarajuće mjesto."
-        },
-        "de": {
-          "translation": "Der Gerechte",
-          "explanation": "Derjenige, der vollkommene Gerechtigkeit besitzt, niemandem Unrecht tut und alles an seinen richtigen Platz setzt."
-        }
-      },
-      {
-        "id": 30,
-        "arabic": "اللَّطِيفُ",
-        "transliteration": "Al-Latif",
-        "bs": {
-          "translation": "Dobrodržeći / Blagi",
-          "explanation": "Onaj koji je izuzetno fin i blag prema Svojim robovima, i koji im pruža dobro na neprimjetne načine."
-        },
-        "de": {
-          "translation": "Der Feinfühlige / Der Gütige",
-          "explanation": "Derjenige, der äußerst feinfühlig und gütig zu Seinen Dienern ist und ihnen Gutes auf unmerkliche Weise zukommen lässt."
-        }
-      },
-      {
-        "id": 31,
-        "arabic": "الخَبِيرُ",
-        "transliteration": "Al-Khabir",
-        "bs": {
-          "translation": "Obaviješteni",
-          "explanation": "Onaj koji je u potpunosti upoznat sa suštinom svih stvari, skrivenim tajnama i unutrašnjim stanjima."
-        },
-        "de": {
-          "translation": "Der Allkundige",
-          "explanation": "Derjenige, der über das innere Wesen aller Dinge, verborgene Geheimnisse und innere Zustände bestens informiert ist."
-        }
-      },
-      {
-        "id": 32,
-        "arabic": "الحَلِيمُ",
-        "transliteration": "Al-Halim",
-        "bs": {
-          "translation": "Blagi / Strpljivi",
-          "explanation": "Onaj koji ne žuri sa kaznom za grijehe Svojih robova, dajući im vremena i priliku za pokajanje."
-        },
-        "de": {
-          "translation": "Der Nachsichtige / Der Milde",
-          "explanation": "Derjenige, der nicht eilt, Sünden zu bestrafen, sondern Seinen Dienern Zeit und Gelegenheit zur Reue gibt."
-        }
-      },
-      {
-        "id": 33,
-        "arabic": "العَظِيمُ",
-        "transliteration": "Al-Azim",
-        "bs": {
-          "translation": "Veličanstveni",
-          "explanation": "Onaj koji posjeduje potpunu veličinu, uzvišenost i dostojanstvo pred kojima je sve ostalo sićušno."
-        },
-        "de": {
-          "translation": "Der Großartige",
-          "explanation": "Derjenige, der vollkommene Größe und Erhabenheit besitzt, vor der alles andere winzig erscheint."
-        }
-      },
-      {
-        "id": 34,
-        "arabic": "الغَفُورُ",
-        "transliteration": "Al-Ghafur",
-        "bs": {
-          "translation": "Svepraštajući",
-          "explanation": "Onaj koji u potpunosti oprašta i najteže grijehe onima koji Mu se iskreno obrate za oprost."
-        },
-        "de": {
-          "translation": "Der Vergebende",
-          "explanation": "Derjenige, der selbst die schwersten Sünden derer vollständig vergibt, die sich Ihm aufrichtig zuwenden."
-        }
-      },
-      {
-        "id": 35,
-        "arabic": "الشَّكُورُ",
-        "transliteration": "Ash-Shakur",
-        "bs": {
-          "translation": "Zahvalni",
-          "explanation": "Onaj koji višestruko nagrađuje i najmanje dobro djelo Svojih robova, cijeneći njihov trud."
-        },
-        "de": {
-          "translation": "Der Dankbare",
-          "explanation": "Derjenige, der selbst die geringste gute Tat Seiner Diener reichlich belohnt und ihre Bemühungen schätzt."
-        }
-      },
-      {
-        "id": 36,
-        "arabic": "العَلِيُّ",
-        "transliteration": "Al-Aliyy",
-        "bs": {
-          "translation": "Svevišnji",
-          "explanation": "Onaj koji je po Svojoj suštini, osobinama i moći iznad svega stvorenog, na najvišem stepenu uzvišenosti."
-        },
-        "de": {
-          "translation": "Der Hohe / Der Erhabene",
-          "explanation": "Derjenige, der in Seinem Wesen, Seinen Eigenschaften und Seiner Macht über allem Erschaffenen steht."
-        }
-      },
-      {
-        "id": 37,
-        "arabic": "الكَبِيرُ",
-        "transliteration": "Al-Kabir",
-        "bs": {
-          "translation": "Veliki",
-          "explanation": "Onaj čijoj veličini nema granica i koga nijedan razum ne može u potpunosti obuhvatiti ni pojmiti."
-        },
-        "de": {
-          "translation": "Der Große",
-          "explanation": "Derjenige, dessen Größe keine Grenzen kennt und den kein Verstand vollständig erfassen kann."
-        }
-      },
-      {
-        "id": 38,
-        "arabic": "الحَفِيظُ",
-        "transliteration": "Al-Hafiz",
-        "bs": {
-          "translation": "Zaštitnik / Čuvar",
-          "explanation": "Onaj koji čuva cijeli kosmos od propasti, i koji bilježi i čuva svako djelo Svojih stvorenja."
-        },
-        "de": {
-          "translation": "Der Hüter / Der Bewahrer",
-          "explanation": "Derjenige, der das gesamte Universum vor dem Untergang bewahrt und jede Tat Seiner Geschöpfe aufzeichnet."
-        }
-      },
-      {
-        "id": 39,
-        "arabic": "المُقِيتُ",
-        "transliteration": "Al-Muqit",
-        "bs": {
-          "translation": "Opskrbitelj / Svjedok",
-          "explanation": "Onaj koji stvara i daje duhovnu i materijalnu hranu svim stvorenjima, i kontroliše sve procese."
-        },
-        "de": {
-          "translation": "Der Ernährer / Der Erhalter",
-          "explanation": "Derjenige, der allen Geschöpfen sowohl geistige als auch materielle Nahrung schenkt und alles erhält."
-        }
-      },
-      {
-        "id": 40,
-        "arabic": "الحَسِيبُ",
-        "transliteration": "Al-Hasib",
-        "bs": {
-          "translation": "Obračunac",
-          "explanation": "Onaj koji je dovoljan Svojim robovima kao zaštita i koji će precizno svoditi račune na Sudnjem danu."
-        },
-        "de": {
-          "translation": "Der Berechner / Der Genügende",
-          "explanation": "Derjenige, der Seinen Dienern als Schutz genügt und am Jüngsten Tag präzise Abrechnung halten wird."
-        }
-      },
-      {
-        "id": 41,
-        "arabic": "الجَلِILُ",
-        "arabic_styled": "الجَلِيلُ",
-        "arabic": "الجَلِيلُ",
-        "transliteration": "Al-Jalil",
-        "bs": {
-          "translation": "Veličanstveni",
-          "explanation": "Onaj koji posjeduje osobine savršenstva, uzvišenosti i veličanstvenosti koje izazivaju strahopoštovanje."
-        },
-        "de": {
-          "translation": "Der Majestätische",
-          "explanation": "Derjenige, der die Eigenschaften der Vollkommenheit und erhabenen Erhabenheit besitzt, die Ehrfurcht gebieten."
-        }
-      },
-      {
-        "id": 42,
-        "arabic": "الكَرِيمُ",
-        "transliteration": "Al-Karim",
-        "bs": {
-          "translation": "Plemeniti / Plemeniti Darovalac",
-          "explanation": "Onaj koji obilno daruje i preko granica očekivanja, prašta grijehe i plemenito se odnosi prema robovima."
-        },
-        "de": {
-          "translation": "Der Großzügige / Der Edelmütige",
-          "explanation": "Derjenige, der über alle Erwartungen hinaus reichlich schenkt, Sünden vergibt und edelmütig handelt."
-        }
-      },
-      {
-        "id": 43,
-        "arabic": "الرَّقِيبُ",
-        "transliteration": "Ar-Raqib",
-        "bs": {
-          "translation": "Budni / Nadzornik",
-          "explanation": "Onaj od koga se ništa ne može sakriti, koji neprestano nadgleda i prati sve što stvorenja čine."
-        },
-        "de": {
-          "translation": "Der Wachsame",
-          "explanation": "Derjenige, vor dem nichts verborgen bleibt und der ununterbrochen alles überwacht, was Seine Geschöpfe tun."
-        }
-      },
-      {
-        "id": 44,
-        "arabic": "المُجِيبُ",
-        "transliteration": "Al-Mujib",
-        "bs": {
-          "translation": "Onaj koji se odaziva",
-          "explanation": "Onaj koji prima molitve Svojih robova i odgovara na njihove vapaje, potrebe i molbe."
-        },
-        "de": {
-          "translation": "Der Erhörer",
-          "explanation": "Derjenige, der die Gebete Seiner Diener annimmt und auf ihre Rufe, Bedürfnisse und Bitten antwortet."
-        }
-      },
-      {
-        "id": 45,
-        "arabic": "الوَاسِعُ",
-        "transliteration": "Al-Wasi'",
-        "bs": {
-          "translation": "Sveobuhvatni",
-          "explanation": "Onaj čije su znanje, milost, opskrba i bogatstvo bezgranični i obuhvataju čitav univerzum."
-        },
-        "de": {
-          "translation": "Der Allumfassende",
-          "explanation": "Derjenige, dessen Wissen, Barmherzigkeit, Versorgung und Reichtum grenzenlos sind und das gesamte Universum umfassen."
-        }
-      },
-      {
-        "id": 46,
-        "arabic": "الحَكِيمُ",
-        "transliteration": "Al-Hakim",
-        "bs": {
-          "translation": "Mudri",
-          "explanation": "Onaj čija su djela, naredbe i stvaranje prožeti savršenom mudrošću i koji sve postavlja na pravo mjesto."
-        },
-        "de": {
-          "translation": "Der Weise",
-          "explanation": "Derjenige, dessen Taten, Befehle und Schöpfung von vollkommener Weisheit durchdrungen sind."
-        }
-      },
-      {
-        "id": 47,
-        "arabic": "الوَدُودُ",
-        "transliteration": "Al-Wadud",
-        "bs": {
-          "translation": "Voljeni / Koji voli",
-          "explanation": "Onaj koji istinski voli Svoje vjerne robove, obasipa ih ljubavlju i čini da oni vole Njega."
-        },
-        "de": {
-          "translation": "Der Liebende",
-          "explanation": "Derjenige, der Seine gläubigen Diener aufrichtig liebt, sie mit Liebe überschüttet und ihre Liebe zu Ihm weckt."
-        }
-      },
-      {
-        "id": 48,
-        "arabic": "المَجِيدُ",
-        "transliteration": "Al-Majid",
-        "bs": {
-          "translation": "Slavljeni",
-          "explanation": "Onaj koji posjeduje potpunu slavu, čast, dostojanstvo i čija su djela vrhunac dobrote."
-        },
-        "de": {
-          "translation": "Der Ruhmreiche",
-          "explanation": "Derjenige, der vollkommenen Ruhm, Ehre und Würde besitzt und dessen Taten der Gipfel der Güte sind."
-        }
-      },
-      {
-        "id": 49,
-        "arabic": "البَاعِثُ",
-        "transliteration": "Al-Ba'ith",
-        "bs": {
-          "translation": "Proživitelj",
-          "explanation": "Onaj koji će na Sudnjem danu proživjeti sve mrtve iz njihovih kaburova radi polaganja računa."
-        },
-        "de": {
-          "translation": "Der Auferwecker",
-          "explanation": "Derjenige, der am Jüngsten Tag alle Toten aus ihren Gräbern auferwecken wird, um Rechenschaft abzulegen."
-        }
-      },
-      {
-        "id": 50,
-        "arabic": "الشَّهِيدُ",
-        "transliteration": "Ash-Shahid",
-        "bs": {
-          "translation": "Svjedok",
-          "explanation": "Onaj koji prisustvuje svemu, svjedoči svakom događaju i čijem oku ništa ne promiče."
-        },
-        "de": {
-          "translation": "Der Zeuge",
-          "explanation": "Derjenige, der bei allem anwesend ist, jedes Ereignis bezeugt und vor dessen Augen nichts verborgen bleibt."
-        }
-      },
-      {
-        "id": 51,
-        "arabic": "الحَقُّ",
-        "transliteration": "Al-Haqq",
-        "bs": {
-          "translation": "Istina",
-          "explanation": "Jedina stvarna i apsolutna Istina, čije je postojanje vječno, a Njegova riječ i obećanje su neprikosnoveni."
-        },
-        "de": {
-          "translation": "Der Wahrhaftige / Die Wahrheit",
-          "explanation": "Die einzig wahre und absolute Wahrheit, deren Existenz ewig ist und deren Wort und Versprechen unumstößlich sind."
-        }
-      },
-      {
-        "id": 52,
-        "arabic": "الوَكِيلُ",
-        "transliteration": "Al-Wakil",
-        "bs": {
-          "translation": "Staratelj / Zaštitnik",
-          "explanation": "Onaj koji se najbolje brine o poslovima Svojih robova i kome se vjernici s punim povjerenjem prepuštaju."
-        },
-        "de": {
-          "translation": "Der Sachwalter / Der Vormund",
-          "explanation": "Derjenige, der sich am besten um die Angelegenheiten Seiner Diener kümmert und dem sich die Gläubigen anvertrauen."
-        }
-      },
-      {
-        "id": 53,
-        "arabic": "العَدْلُ",
-        "arabic_styled": "القَوِيُّ",
-        "arabic": "القَوِيُّ",
-        "transliteration": "Al-Qawiyy",
-        "bs": {
-          "translation": "Jaki / Moćni",
-          "explanation": "Onaj koji posjeduje potpunu i savršenu snagu, koja nikada ne slabi niti se umara."
-        },
-        "de": {
-          "translation": "Der Starke",
-          "explanation": "Derjenige, der vollkommene und makellose Stärke besitzt, die niemals nachlässt oder ermüdet."
-        }
-      },
-      {
-        "id": 54,
-        "arabic": "المَتِينُ",
-        "transliteration": "Al-Matin",
-        "bs": {
-          "translation": "Čvrsti / Nepokolebljivi",
-          "explanation": "Onaj čija je snaga stabilna, čvrsta i nepokolebljiva, i niko ne može ugroziti Njegovu moć."
-        },
-        "de": {
-          "translation": "Der Feste / Der Beständige",
-          "explanation": "Derjenige, dessen Stärke stabil, fest und unerschütterlich ist, und dessen Macht niemand gefährden kann."
-        }
-      },
-      {
-        "id": 55,
-        "arabic": "الوَلِيُّ",
-        "transliteration": "Al-Waliyy",
-        "bs": {
-          "translation": "Zaštitnik / Prijatelj",
-          "explanation": "Bliski i odani Prijatelj vjernika, koji im pomaže, podržava ih i izvodi ih iz tmina na svjetlo."
-        },
-        "de": {
-          "translation": "Der helfende Freund / Der Schutzherr",
-          "explanation": "Der nahe und treue Freund der Gläubigen, der ihnen hilft, sie unterstützt und sie aus der Dunkelheit ins Licht führt."
-        }
-      },
-      {
-        "id": 56,
-        "arabic": "الحَمِيدُ",
-        "transliteration": "Al-Hamid",
-        "bs": {
-          "translation": "Hvaljeni",
-          "explanation": "Jedini istinski dostojan hvale i zahvale za Svoju suštinu, osobine i bezbrojna dobročinstva."
-        },
-        "de": {
-          "translation": "Der Lobenswerte",
-          "explanation": "Der Einzige, der aufgrund Seines Wesens, Seiner Eigenschaften und Seiner unzähligen Wohltaten des Lobes würdig ist."
-        }
-      },
-      {
-        "id": 57,
-        "arabic": "المُحْصِي",
-        "transliteration": "Al-Muhsi",
-        "bs": {
-          "translation": "Onaj koji sve obuhvata i broji",
-          "explanation": "Onaj koji zna tačan broj svih stvorenja, svih njihovih djela, udisaja i pokreta, i ništa ne zaboravlja."
-        },
-        "de": {
-          "translation": "Der alles Aufzeichnende / Der Zähler",
-          "explanation": "Derjenige, der die genaue Anzahl aller Geschöpfe, ihrer Taten, Atemzüge und Bewegungen kennt und nichts vergisst."
-        }
-      },
-      {
-        "id": 58,
-        "arabic": "المُبْدِئُ",
-        "transliteration": "Al-Mubdi'",
-        "bs": {
-          "translation": "Začetnik / Izumitelj",
-          "explanation": "Onaj koji započinje proces stvaranja bez ikakvog prethodnog modela ili uzorka."
-        },
-        "de": {
-          "translation": "Der Urheber / Der Initiator",
-          "explanation": "Derjenige, der den Schöpfungsprozess ohne jegliches Vorbild oder Modell beginnt."
-        }
-      },
-      {
-        "id": 59,
-        "arabic": "المُعِيدُ",
-        "transliteration": "Al-Mu'id",
-        "bs": {
-          "translation": "Povratnik / Obnovitelj",
-          "explanation": "Onaj koji će nakon smrti ponovo proživjeti i vratiti u život sva stvorenja u istom obliku."
-        },
-        "de": {
-          "translation": "Der Wiederhersteller",
-          "explanation": "Derjenige, der nach dem Tod alle Geschöpfe in gleicher Gestalt wiederbeleben und ins Leben zurückbringen wird."
-        }
-      },
-      {
-        "id": 60,
-        "arabic": "المُحْيِي",
-        "transliteration": "Al-Muhyi",
-        "bs": {
-          "translation": "Onaj koji daje život",
-          "explanation": "Onaj koji oživljava mrtvu materiju, daruje život i oživljava srca spoznajom i imanom."
-        },
-        "de": {
-          "translation": "Der Lebensspender",
-          "explanation": "Derjenige, der toter Materie Leben einhaucht, Leben schenkt und Herzen mit Erkenntnis und Glauben belebt."
-        }
-      },
-      {
-        "id": 61,
-        "arabic": "المُمِيتُ",
-        "transliteration": "Al-Mumit",
-        "bs": {
-          "translation": "Onaj koji daje smrt",
-          "explanation": "Onaj koji određuje kraj života Svojim stvorenjima i uzima njihove duše kada nastupi njihov rok."
-        },
-        "de": {
-          "translation": "Der Todbringer",
-          "explanation": "Derjenige, der das Ende des Lebens Seiner Geschöpfe bestimmt und ihre Seelen nimmt, wenn ihre Zeit abgelaufen ist."
-        }
-      },
-      {
-        "id": 62,
-        "arabic": "الحَيُّ",
-        "transliteration": "Al-Hayy",
-        "bs": {
-          "translation": "Živi",
-          "explanation": "Onaj koji posjeduje vječni život bez početka i bez kraja, i koji nikada ne umire."
-        },
-        "de": {
-          "translation": "Der Lebendige",
-          "explanation": "Derjenige, der ein ewiges Leben ohne Anfang und ohne Ende besitzt und der niemals stirbt."
-        }
-      },
-      {
-        "id": 63,
-        "arabic": "القَيُّومُ",
-        "transliteration": "Al-Qayyum",
-        "bs": {
-          "translation": "Samoopstojeći / Održavatelj",
-          "explanation": "Onaj koji sam o sebi opstoji i koji održava čitav svemir i brine o opstanku svih stvorenja."
-        },
-        "de": {
-          "translation": "Der Beständige / Der Versorger",
-          "explanation": "Derjenige, der aus Sich Selbst heraus existiert und das gesamte Universum erhält und versorgt."
-        }
-      },
-      {
-        "id": 64,
-        "arabic": "الوَاجِدُ",
-        "transliteration": "Al-Wajid",
-        "bs": {
-          "translation": "Nalazač / Bogati",
-          "explanation": "Onaj kome ništa ne nedostaje, koji nalazi sve što poželi i čijem bogatstvu nema kraja."
-        },
-        "de": {
-          "translation": "Der Finder / Der Wohlhabende",
-          "explanation": "Derjenige, dem es an nichts mangelt, der alles findet, was Er will, und dessen Reichtum endlos ist."
-        }
-      },
-      {
-        "id": 65,
-        "arabic": "المَاجِدُ",
-        "transliteration": "Al-Majid",
-        "bs": {
-          "translation": "Slavni / Plemeniti",
-          "explanation": "Onaj koji posjeduje veliko dostojanstvo, čast, obilnu dobrotu i beskrajnu plemenitost."
-        },
-        "de": {
-          "translation": "Der Glorreiche / Der Edle",
-          "explanation": "Derjenige, der große Würde, Ehre, reichliche Güte und unendlichen Edelmut besitzt."
-        }
-      },
-      {
-        "id": 66,
-        "arabic": "الوَاحِدُ",
-        "transliteration": "Al-Wahid",
-        "bs": {
-          "translation": "Jedinstveni",
-          "explanation": "Jedan i jedinstven u Svojoj suštini, osobinama i djelima, bez ikakvog sudruga."
-        },
-        "de": {
-          "translation": "Der Einzige",
-          "explanation": "Der Eine und Einzigartige in Seinem Wesen, Seinen Eigenschaften und Seinen Taten, ohne Gefährten."
-        }
-      },
-      {
-        "id": 67,
-        "arabic": "الأَحَدُ",
-        "transliteration": "Al-Ahad",
-        "bs": {
-          "translation": "Jedan / Jedini",
-          "explanation": "Jedan i neponovljiv, koji je nedjeljiv i nema nikoga sličnog niti ravnog Sebi."
-        },
-        "de": {
-          "translation": "Der Eine",
-          "explanation": "Der Eine, Unteilbare, dem niemand gleicht oder ebenbürtig ist."
-        }
-      },
-      {
-        "id": 68,
-        "arabic": "الصَّمَدُ",
-        "transliteration": "As-Samad",
-        "bs": {
-          "translation": "Utočište / Apsolutni Gospodar",
-          "explanation": "Onaj kome se svi obraćaju za svoje potrebe, a On ne ovisi ni o kome i nema nikakvih potreba."
-        },
-        "de": {
-          "translation": "Der Ewige / Der Unabhängige",
-          "explanation": "Derjenige, an den sich alle mit ihren Bedürfnissen wenden, während Er von niemandem abhängt."
-        }
-      },
-      {
-        "id": 69,
-        "arabic": "Qadir",
-        "arabic_styled": "القَادِرُ",
-        "arabic": "القَادِرُ",
-        "transliteration": "Al-Qadir",
-        "bs": {
-          "translation": "Moćni",
-          "explanation": "Onaj koji posjeduje apsolutnu moć da uradi sve što želi, i ništa Ga ne može spriječiti."
-        },
-        "de": {
-          "translation": "Der Mächtige",
-          "explanation": "Derjenige, der die absolute Macht besitzt, alles zu tun, was Er will, ohne dass Ihn etwas hindern kann."
-        }
-      },
-      {
-        "id": 70,
-        "arabic": "المُقْتَدِرُ",
-        "transliteration": "Al-Muqtadir",
-        "bs": {
-          "translation": "Svemogući",
-          "explanation": "Onaj koji Svoju savršenu moć pokazuje kroz stvaranje, održavanje i upravljanje cjelokupnim svemirom."
-        },
-        "de": {
-          "translation": "Der Schöpfer aller Macht / Der Allmächtige",
-          "explanation": "Derjenige, der Seine vollkommene Macht durch die Erschaffung und Verwaltung des Universums zeigt."
-        }
-      },
-      {
-        "id": 71,
-        "arabic": "المُقَدِّمُ",
-        "transliteration": "Al-Muqaddim",
-        "bs": {
-          "translation": "Onaj koji unapređuje / Stavlja ispred",
-          "explanation": "Onaj koji postavlja stvari ispred drugih na osnovu Svoje mudrosti, bilo u prostoru, vremenu ili statusu."
-        },
-        "de": {
-          "translation": "Der Beförderer / Der Voranstellende",
-          "explanation": "Derjenige, der Dinge nach Seiner Weisheit voranstellt, sei es in Raum, Zeit oder Status."
-        }
-      },
-      {
-        "id": 72,
-        "arabic": "المُؤَخِّرُ",
-        "transliteration": "Al-Mu'akhkhir",
-        "bs": {
-          "translation": "Onaj koji zapostavlja / Odgađa",
-          "explanation": "Onaj koji odgađa stvari i postavlja ih iza drugih u skladu sa Svojim pravednim planom."
-        },
-        "de": {
-          "translation": "Der Verzögerer / Der Zurückstellende",
-          "explanation": "Derjenige, der Dinge nach Seinem gerechten Plan verzögert und zurückstellt."
-        }
-      },
-      {
-        "id": 73,
-        "arabic": "الأَوَّلُ",
-        "transliteration": "Al-Awwal",
-        "bs": {
-          "translation": "Prvi",
-          "explanation": "Onaj koji postoji prije svega stvorenog, čijem postojanju nema početka."
-        },
-        "de": {
-          "translation": "Der Erste",
-          "explanation": "Derjenige, der vor allem Erschaffenen existierte und dessen Existenz keinen Anfang hat."
-        }
-      },
-      {
-        "id": 74,
-        "arabic": "الآخِرُ",
-        "transliteration": "Al-Akhir",
-        "bs": {
-          "translation": "Posljednji",
-          "explanation": "Onaj koji ostaje nakon što sve stvoreno nestane, čijem postojanju nema kraja."
-        },
-        "de": {
-          "translation": "Der Letzte",
-          "explanation": "Derjenige, der fortbesteht, nachdem alles Erschaffene vergangen ist, und dessen Existenz kein Ende hat."
-        }
-      },
-      {
-        "id": 75,
-        "arabic": "الظَّاهِرُ",
-        "transliteration": "Az-Zahir",
-        "bs": {
-          "translation": "Vidljivi / Jasni",
-          "explanation": "Onaj čije je postojanje očigledno i jasno kroz dokaze u prirodi i svemiru."
-        },
-        "de": {
-          "translation": "Der Offenbare",
-          "explanation": "Derjenige, dessen Existenz durch die Beweise in der Natur und im Universum offensichtlich und klar ist."
-        }
-      },
-      {
-        "id": 76,
-        "arabic": "البَاطِنُ",
-        "transliteration": "Al-Batin",
-        "bs": {
-          "translation": "Skriveni",
-          "explanation": "Onaj koji je skriven od čula stvorenja na ovom svijetu, i koga niko ne može vidjeti."
-        },
-        "de": {
-          "translation": "Der Verborgene",
-          "explanation": "Derjenige, der in dieser Welt vor den Sinnen der Geschöpfe verborgen ist und den niemand physisch sehen kann."
-        }
-      },
-      {
-        "id": 77,
-        "arabic": "الوَالِي",
-        "transliteration": "Al-Wali",
-        "bs": {
-          "translation": "Upravitelj",
-          "explanation": "Gospodar i Upravitelj koji usmjerava sve događaje u kosmosu i vlada svime."
-        },
-        "de": {
-          "translation": "Der Herrscher / Der Schutzherr",
-          "explanation": "Der Herr und Lenker, der alle Ereignisse im Kosmos leitet und über alles herrscht."
-        }
-      },
-      {
-        "id": 78,
-        "arabic": "المُتَعَالِي",
-        "transliteration": "Al-Muta'ali",
-        "bs": {
-          "translation": "Najuzvišeniji",
-          "explanation": "Onaj koji je uzvišen iznad svih stvorenja, i koga nikakve ljudske pretpostavke ne mogu dosegnuti."
-        },
-        "de": {
-          "translation": "Der Höchste / Der Erhabene",
-          "explanation": "Derjenige, der erhaben über alle Schöpfung ist, weit jenseits aller menschlichen Vorstellungskraft."
-        }
-      },
-      {
-        "id": 79,
-        "arabic": "البَرُّ",
-        "transliteration": "Al-Barr",
-        "bs": {
-          "translation": "Dobročinitelj",
-          "explanation": "Onaj koji je izvor svakog dobra i dobročinstva, izuzetno blag i darežljiv prema stvorenjima."
-        },
-        "de": {
-          "translation": "Der Gütige / Der Wohltäter",
-          "explanation": "Derjenige, der die Quelle allen Guten ist, äußerst mild und großzügig zu Seinen Geschöpfen."
-        }
-      },
-      {
-        "id": 80,
-        "arabic": "التَّوَّابُ",
-        "transliteration": "At-Tawwab",
-        "bs": {
-          "translation": "Primatelj pokajanja",
-          "explanation": "Onaj koji stalno potiče Svoje robove na pokajanje i rado ga prima od onih koji se iskreno pokaju."
-        },
-        "de": {
-          "translation": "Der Reue-Annehmende",
-          "explanation": "Derjenige, der Seine Diener stetig zur Reue führt und sie von denjenigen, die aufrichtig bereuen, annimmt."
-        }
-      },
-      {
-        "id": 81,
-        "arabic": "المُنْتَقِمُ",
-        "transliteration": "Al-Muntaqim",
-        "bs": {
-          "translation": "Osvetnik",
-          "explanation": "Pravedni Osvetnik koji kažnjava nevjernike i ohole nasilnike nakon što im pošalje jasna upozorenja."
-        },
-        "de": {
-          "translation": "Der Vergeltende / Der Rächer",
-          "explanation": "Der gerechte Vergeltende, der die Ungerechten nach deutlichen Warnungen bestraft."
-        }
-      },
-      {
-        "id": 82,
-        "arabic": "العَفُوُّ",
-        "transliteration": "Al-Afuww",
-        "bs": {
-          "translation": "Onaj koji briše grijehe",
-          "explanation": "Onaj koji potpuno briše grijehe Svojih robova kao da nikada nisu ni postojali, prelazeći preko njih."
-        },
-        "de": {
-          "translation": "Der Verzeihende / Der Tilger der Sünden",
-          "explanation": "Derjenige, der die Sünden Seiner Diener vollständig auslöscht, als ob sie nie existiert hätten."
-        }
-      },
-      {
-        "id": 83,
-        "arabic": "الرَّؤُوفُ",
-        "transliteration": "Ar-Ra'uf",
-        "bs": {
-          "translation": "Blagi / Milosrdni",
-          "explanation": "Onaj čija je milost izuzetno blaga, nježna i graniči sa krajnjim saosjećanjem prema stvorenjima."
-        },
-        "de": {
-          "translation": "Der Mitleidige / Der Gütige",
-          "explanation": "Derjenige, dessen Barmherzigkeit äußerst mild, sanft und von tiefstem Mitgefühl geprägt ist."
-        }
-      },
-      {
-        "id": 84,
-        "arabic": "مَالِكُ المُلْكِ",
-        "transliteration": "Malik-ul-Mulk",
-        "bs": {
-          "translation": "Vladar Vlasti / Gospodar svemira",
-          "explanation": "Jedini i apsolutni vlasnik cjelokupnog svemira, koji upravlja svim svjetovima i carstvima bez posrednika."
-        },
-        "de": {
-          "translation": "Der Herrscher des Königreichs",
-          "explanation": "Der einzige und absolute Besitzer des gesamten Universums, der über alle Welten ohne Vermittler herrscht."
-        }
-      },
-      {
-        "id": 85,
-        "arabic": "ذُو الجَلَالِ وَالإِكْرَامِ",
-        "transliteration": "Dhul-Jalali wal-Ikram",
-        "bs": {
-          "translation": "Posjednik Veličanstva i Časti",
-          "explanation": "Onaj koji posjeduje apsolutnu veličinu, uzvišenost, i koji zaslužuje da Mu se iskazuje najveće poštovanje i počast."
-        },
-        "de": {
-          "translation": "Der Besitzer von Majestät und Ehre",
-          "explanation": "Derjenige, der absolute Größe und Erhabenheit besitzt und dem größter Respekt und Ehre gebühren."
-        }
-      },
-      {
-        "id": 86,
-        "arabic": "المُقْسِطُ",
-        "transliteration": "Al-Muqsit",
-        "bs": {
-          "translation": "Pravedni / Usklađivač",
-          "explanation": "Pravedni Vladar koji uspostavlja potpunu ravnotežu i pravdu, štiteći potlačene od tlačitelja."
-        },
-        "de": {
-          "translation": "Der unparteiisch Richtende",
-          "explanation": "Der gerechte Herrscher, der vollkommene Ausgewogenheit herstellt und die Unterdrückten vor Unterdrückern schützt."
-        }
-      },
-      {
-        "id": 87,
-        "arabic": "الجَامِعُ",
-        "transliteration": "Al-Jami'",
-        "bs": {
-          "translation": "Sakupljač",
-          "explanation": "Onaj koji će sakupiti sva stvorenja na Sudnjem danu na jednom mjestu radi polaganja računa."
-        },
-        "de": {
-          "translation": "Der Versammler",
-          "explanation": "Derjenige, der alle Geschöpfe am Jüngsten Tag an einem Ort versammeln wird, um Rechenschaft abzulegen."
-        }
-      },
-      {
-        "id": 88,
-        "arabic": "الغَنِيُّ",
-        "transliteration": "Al-Ghaniyy",
-        "bs": {
-          "translation": "Bogati / Neovisni",
-          "explanation": "Apsolutno bogati Gospodar koji ni o kome i ni o čemu ne ovisi, dok sve drugo ovisi o Njemu."
-        },
-        "de": {
-          "translation": "Der Reiche / Der Unbedürftige",
-          "explanation": "Der absolut reiche Herr, der von niemandem abhängt, während alles andere von Ihm abhängig ist."
-        }
-      },
-      {
-        "id": 89,
-        "arabic": "المُغْنِي",
-        "transliteration": "Al-Mughni",
-        "bs": {
-          "translation": "Onaj koji bogati",
-          "explanation": "Onaj koji Svojom milošću i opskrbom obogaćuje stvorenja, dajući im duhovno i materijalno bogatstvo."
-        },
-        "de": {
-          "translation": "Der Reichmachende",
-          "explanation": "Derjenige, der Seine Geschöpfe mit Seiner Gnade beschenkt und ihnen geistigen und materiellen Reichtum verleiht."
-        }
-      },
-      {
-        "id": 90,
-        "arabic": "المَانِعُ",
-        "transliteration": "Al-Mani'",
-        "bs": {
-          "translation": "Onaj koji sprječava / Brani",
-          "explanation": "Onaj koji po Svojoj mudrosti sprječava štetne stvari da pogode Svoje robove ili im uskraćuje ono što nije dobro za njih."
-        },
-        "de": {
-          "translation": "Der Verwehrer / Der Schützer",
-          "explanation": "Derjenige, der nach Seiner Weisheit schädliche Dinge von Seinen Dienern abwendet oder ihnen verwehrt, was nicht gut für sie ist."
-        }
-      },
-      {
-        "id": 91,
-        "arabic": "الضَّارُّ",
-        "transliteration": "Ad-Darr",
-        "bs": {
-          "translation": "Onaj koji šteti / Koji stvara štetu",
-          "explanation": "Onaj bez čije volje i određenja niko ne može pretrpjeti nikakvu štetu niti iskušenje na ovom svijetu."
-        },
-        "de": {
-          "translation": "Der Schadenbringende / Der Prüfende",
-          "explanation": "Derjenige, ohne dessen Willen und Bestimmung niemand Schaden oder Prüfungen in dieser Welt erleiden kann."
-        }
-      },
-      {
-        "id": 92,
-        "arabic": "النَّافِعُ",
-        "transliteration": "An-Nafi'",
-        "bs": {
-          "translation": "Koristan / Izvor koristi",
-          "explanation": "Onaj koji stvara svaku korist, napredak i dobro, i daruje ih kome On hoće."
-        },
-        "de": {
-          "translation": "Der Nutzenspendende",
-          "explanation": "Derjenige, der jeden Nutzen, Fortschritt und Gutes erschafft und schenkt, wem Er will."
-        }
-      },
-      {
-        "id": 93,
-        "arabic": "النُّورُ",
-        "transliteration": "An-Nur",
-        "bs": {
-          "translation": "Svjetlost",
-          "explanation": "Onaj koji osvjetljava nebesa i Zemlju Svojim nurom, i koji upućuje srca vjernika na pravi put."
-        },
-        "de": {
-          "translation": "Das Licht",
-          "explanation": "Derjenige, der Himmel und Erde mit Seinem Licht erhellt und die Herzen der Gläubigen auf den rechten Weg leitet."
-        }
-      },
-      {
-        "id": 94,
-        "arabic": "الهَادِي",
-        "transliteration": "Al-Hadi",
-        "bs": {
-          "translation": "Vodič / Upućivač",
-          "explanation": "Onaj koji upućuje Svoja stvorenja na ono što im donosi korist i vodi vjernike ka spoznaji Istine."
-        },
-        "de": {
-          "translation": "Der Wegweiser / Der Führende",
-          "explanation": "Derjenige, der Seine Geschöpfe zu dem führt, was ihnen nützt, und die Gläubigen zur Erkenntnis der Wahrheit leitet."
-        }
-      },
-      {
-        "id": 95,
-        "arabic": "البَدِيعُ",
-        "transliteration": "Al-Badi'",
-        "bs": {
-          "translation": "Prekrasni Stvoritelj / Nedostižni",
-          "explanation": "Onaj koji stvara veličanstvena i neviđena stvorenja bez ikakvog uzora, u savršenoj ljepoti."
-        },
-        "de": {
-          "translation": "Der Schöpfer des Neuen / Der Einzigartige",
-          "explanation": "Derjenige, der prachtvolle Geschöpfe ohne Vorbild in vollkommener Schönheit erschafft."
-        }
-      },
-      {
-        "id": 96,
-        "arabic": "البَاقِي",
-        "transliteration": "Al-Baqi",
-        "bs": {
-          "translation": "Vječni / Trajni",
-          "explanation": "Onaj koji ostaje zauvijek, čije postojanje ne prestaje i ne podliježe promjenama vremena."
-        },
-        "de": {
-          "translation": "Der Ewige / Der Bleibende",
-          "explanation": "Derjenige, der für immer bleibt, dessen Existenz niemals endet und der keinen zeitlichen Veränderungen unterliegt."
-        }
-      },
-      {
-        "id": 97,
-        "arabic": "الوَارِثُ",
-        "transliteration": "Al-Warith",
-        "bs": {
-          "translation": "Nasljednik",
-          "explanation": "Onaj kome sve pripada nakon što stvorenja nestanu, stvarni i konačni vlasnik svega postojećeg."
-        },
-        "de": {
-          "translation": "Der Erbe",
-          "explanation": "Derjenige, dem alles zufällt, nachdem die Geschöpfe vergangen sind, der wahre und endgültige Besitzer aller Dinge."
-        }
-      },
-      {
-        "id": 98,
-        "arabic": "الرَّشِيدُ",
-        "transliteration": "Ar-Rashid",
-        "bs": {
-          "translation": "Upućivač na pravi put",
-          "explanation": "Onaj koji nepogrešivo vodi stvorenja ka njihovim ciljevima, i čije su sve odredbe i putevi savršeni."
-        },
-        "de": {
-          "translation": "Der Führende auf den rechten Weg",
-          "explanation": "Derjenige, der die Geschöpfe fehlerfrei zu ihren Zielen führt und dessen Bestimmungen vollkommen sind."
-        }
-      },
-      {
-        "id": 99,
-        "arabic": "الصَّبُورُ",
-        "transliteration": "As-Sabur",
-        "bs": {
-          "translation": "Strpljivi",
-          "explanation": "Onaj koji ne žuri sa kaznom, nego strpljivo čeka pokajanje Svojih robova i daje im vremena."
-        },
-        "de": {
-          "translation": "Der Geduldige",
-          "explanation": "Derjenige, der nicht voreilig straft, sondern geduldig auf die Reue Seiner Diener wartet."
-        }
-      }
-    ];
+  {
+    "id": 1,
+    "arabic": "الرَّحْمَنُ",
+    "transliteration": "Ar-Rahman",
+    "bs": {
+      "translation": "Svemilosni",
+      "explanation": "Onaj čija milost obuhvata sve stvoreno na ovome svijetu. Njegovo milosrđe nije ograničeno i pruža se svim bićima, bez obzira na njihova djela ili vjerovanje. Ova milost je opća i odnosi se na održavanje života, opskrbu i sve blagodati u kojima uživaju sva stvorenja."
+    },
+    "de": {
+      "translation": "Der Allerbarmer",
+      "explanation": "Derjenige, dessen Barmherzigkeit alles Erschaffene in dieser Welt umfasst. Seine Gnade ist grenzenlos und gilt für alle Geschöpfe, unabhängig von ihren Taten oder ihrem Glauben. Diese allgemeine Barmherzigkeit zeigt sich in der Aufrechterhaltung des Lebens, der Versorgung und allen Segnungen, die die Schöpfung erfährt."
+    }
+  },
+  {
+    "id": 2,
+    "arabic": "الرَّحِيمُ",
+    "transliteration": "Ar-Rahim",
+    "bs": {
+      "translation": "Samilosni",
+      "explanation": "Onaj koji je posebno milostiv prema vjernicima, naročito na drugom svijetu (Ahiretu). Dok je Ar-Rahman opća milost prema svima, Ar-Rahim je posebna, trajna milost namijenjena onima koji vjeruju i čine dobro. Ova milost vodi vjernike ka spasu i Džennetu."
+    },
+    "de": {
+      "translation": "Der Barmherzige",
+      "explanation": "Derjenige, der den Gläubigen gegenüber besonders barmherzig ist, insbesondere im Jenseits (Achira). Während Ar-Rahman die allgemeine Gnade für alle beschreibt, ist Ar-Rahim eine spezielle, dauerhafte Barmherzigkeit, die für diejenigen bestimmt ist, die glauben und Gutes tun."
+    }
+  },
+  {
+    "id": 3,
+    "arabic": "المَلِكُ",
+    "transliteration": "Al-Malik",
+    "bs": {
+      "translation": "Vladar",
+      "explanation": "Istinski vladar, Suveren i gospodar svega postojećeg. Njegova vlast je apsolutna, trajna i neograničena. Zemaljski vladari imaju privremenu i ograničenu moć, dok je On jedini stvarni posjednik cijelog univerzuma i sve što postoji podređeno je Njegovoj volji."
+    },
+    "de": {
+      "translation": "Der König",
+      "explanation": "Der wahre Herrscher, Souverän und Besitzer von allem, was existiert. Seine Herrschaft ist absolut, dauerhaft und unbegrenzt. Irdische Herrscher besitzen nur temporäre und begrenzte Macht, während Er der einzig wahre Besitzer des Universums ist."
+    }
+  },
+  {
+    "id": 4,
+    "arabic": "القُدُّوسُ",
+    "transliteration": "Al-Quddus",
+    "bs": {
+      "translation": "Sveti / Čisti",
+      "explanation": "Onaj koji je čist od svakog nedostatka, nesavršenstva ili greške. Njegova suština je potpuno sveta i uzvišena iznad onoga što Mu se pripisuje od nesavršenosti. On je dostojan svake hvale i čistote."
+    },
+    "de": {
+      "translation": "Der Heilige / Der Reine",
+      "explanation": "Der Reine, der frei von jeglichem Mangel, Makel oder Fehler ist. Sein Wesen ist heilig und erhaben über alle Unzulänglichkeiten, die Ihm zugeschrieben werden könnten. Er ist des vollkommenen Lobes würdig."
+    }
+  },
+  {
+    "id": 5,
+    "arabic": "السَّلَامُ",
+    "transliteration": "As-Salam",
+    "bs": {
+      "translation": "Izvor mira / Spasitelj",
+      "explanation": "Onaj koji je čist od svih mahana i nedostataka, i koji svojim stvorenjima daruje mir, sigurnost i spasenje od svake nevolje."
+    },
+    "de": {
+      "translation": "Der Friede / Der Retter",
+      "explanation": "Derjenige, der frei von allen Mängeln ist und Seinen Geschöpfen Frieden, Sicherheit und Errettung vor Unheil schenkt."
+    }
+  },
+  {
+    "id": 6,
+    "arabic": "المُؤْمِنُ",
+    "transliteration": "Al-Mu'min",
+    "bs": {
+      "translation": "Čuvar vjere i sigurnosti",
+      "explanation": "Onaj koji ulijeva sigurnost u srca onih koji traže utočište i koji potvrđuje istinitost obećanja datog Svojim robovima."
+    },
+    "de": {
+      "translation": "Der Verleiher der Sicherheit",
+      "explanation": "Derjenige, der den Herzen Sicherheit schenkt und die Wahrheit Seiner Versprechen gegenüber Seinen Dienern bestätigt."
+    }
+  },
+  {
+    "id": 7,
+    "arabic": "المُهَيْمِنُ",
+    "transliteration": "Al-Muhaymin",
+    "bs": {
+      "translation": "Zaštitnik / Bdileći",
+      "explanation": "Onaj koji motri nad svim stvorenjima, nadgleda njihova djela, određuje im nafaku i čuva ih od svake nepravde."
+    },
+    "de": {
+      "translation": "Der Wächter / Der Beherrscher",
+      "explanation": "Derjenige, der über alle Geschöpfe wacht, ihre Taten beaufsichtigt, ihre Versorgung bestimmt und sie behütet."
+    }
+  },
+  {
+    "id": 8,
+    "arabic": "العَزِيزُ",
+    "transliteration": "Al-Aziz",
+    "bs": {
+      "translation": "Silni / Nadmoćni",
+      "explanation": "Nepobjedivi Vladar čijoj se snazi i moći niko ne može suprotstaviti, a koji posjeduje apsolutno dostojanstvo."
+    },
+    "de": {
+      "translation": "Der Allmächtige",
+      "explanation": "Der unbesiegbare Herrscher, dessen Macht niemand widerstehen kann und der absolute Würde besitzt."
+    }
+  },
+  {
+    "id": 9,
+    "arabic": "الجَبَّارُ",
+    "transliteration": "Al-Jabbar",
+    "bs": {
+      "translation": "Prislilitelj / Popravitelj",
+      "explanation": "Onaj čijoj se volji sve pokorava, ali i Onaj koji liječi slomljena srca i popravlja stanje Svojih stvorenja."
+    },
+    "de": {
+      "translation": "Der Unterwerfer / Der Heiler",
+      "explanation": "Derjenige, dessen Willen sich alles beugt, aber auch derjenige, der gebrochene Herzen heilt und Zustände verbessert."
+    }
+  },
+  {
+    "id": 10,
+    "arabic": "المُتَكَبِّرُ",
+    "transliteration": "Al-Mutakabbir",
+    "bs": {
+      "translation": "Uzvišeni / Gordi",
+      "explanation": "Jedini koji ima pravo na veličinu i uzvišenost, potpuno čist od svih osobina stvorenja i njihovih slabosti."
+    },
+    "de": {
+      "translation": "Der Erhabene / Der Stolze",
+      "explanation": "Der Einzige, der das Recht auf wahre Größe besitzt, weit erhaben über die Eigenschaften und Schwächen der Schöpfung."
+    }
+  },
+  {
+    "id": 11,
+    "arabic": "الخَالِقُ",
+    "transliteration": "Al-Khaliq",
+    "bs": {
+      "translation": "Stvoritelj",
+      "explanation": "Onaj koji stvara sve iz ničega, određujući mjeru, svojstva i sudbinu svakog stvorenja prije nego što ono nastane."
+    },
+    "de": {
+      "translation": "Der Schöpfer",
+      "explanation": "Derjenige, der alles aus dem Nichts erschafft und das Maß, die Eigenschaften und das Schicksal jedes Geschöpfs festlegt."
+    }
+  },
+  {
+    "id": 12,
+    "arabic": "البَارِئُ",
+    "transliteration": "Al-Bari'",
+    "bs": {
+      "translation": "Onaj koji stvara iz ničega",
+      "explanation": "Onaj koji stvara bića bez ikakvog prethodnog primjera ili šablona, savršeno usklađujući sve dijelove stvorenog."
+    },
+    "de": {
+      "translation": "Der Erschaffer aus dem Nichts",
+      "explanation": "Derjenige, der die Geschöpfe ohne Vorbild erschafft und alle Teile des Erschaffenen perfekt aufeinander abstimmt."
+    }
+  },
+  {
+    "id": 13,
+    "arabic": "المُصَوِّرُ",
+    "transliteration": "Al-Musawwir",
+    "bs": {
+      "translation": "Oblikovatelj / Darovalac lika",
+      "explanation": "Onaj koji svakom stvorenju daje jedinstven i specifičan oblik, izgled i prepoznatljive karakteristike."
+    },
+    "de": {
+      "translation": "Der Gestalter",
+      "explanation": "Derjenige, der jedem Geschöpf seine einzigartige und spezifische Form, Gestalt und Merkmale verleiht."
+    }
+  },
+  {
+    "id": 14,
+    "arabic": "الغَفَّارُ",
+    "transliteration": "Al-Ghaffar",
+    "bs": {
+      "translation": "Svepraštajući",
+      "explanation": "Onaj koji konstantno i iznova prašta grijehe Svojih robova, prikrivajući njihove sramote i nedostatke."
+    },
+    "de": {
+      "translation": "Der Allverzeihende",
+      "explanation": "Derjenige, der Seinen Dienern immer wieder vergibt, ihre Sünden zudeckt und ihre Fehler verbirgt."
+    }
+  },
+  {
+    "id": 15,
+    "arabic": "القَهَّارُ",
+    "transliteration": "Al-Qahhar",
+    "bs": {
+      "translation": "Nadvladavajući",
+      "explanation": "Onaj koji posjeduje apsolutnu moć da nadvlada sve otpore i kome je sve u svemiru potpuno pokoreno."
+    },
+    "de": {
+      "translation": "Der Bezwinger",
+      "explanation": "Derjenige, der die absolute Macht besitzt, jeden Widerstand zu brechen, und dem sich alles im Universum fügt."
+    }
+  },
+  {
+    "id": 16,
+    "arabic": "الوَهَّابُ",
+    "transliteration": "Al-Wahhab",
+    "bs": {
+      "translation": "Darovalac / Koji obilno poklanja",
+      "explanation": "Onaj koji neprestano i bez traženja protuusluge daruje Svoja stvorenja bezbrojnim blagodatima."
+    },
+    "de": {
+      "translation": "Der Geber / Der Schenkende",
+      "explanation": "Derjenige, der Seinen Geschöpfen fortlaufend und ohne Gegenleistung unzählige Segnungen schenkt."
+    }
+  },
+  {
+    "id": 17,
+    "arabic": "الرَّزَّاقُ",
+    "transliteration": "Ar-Razzaq",
+    "bs": {
+      "translation": "Opskrbitelj",
+      "explanation": "Onaj koji je preuzeo na Sebe obavezu da opskrbi svako živo biće hranom, zdravljem i svim potrebnim za život."
+    },
+    "de": {
+      "translation": "Der Versorger",
+      "explanation": "Derjenige, der es auf Sich genommen hat, jedes Lebewesen mit Nahrung, Gesundheit und allem Lebensnotwendigen zu versorgen."
+    }
+  },
+  {
+    "id": 18,
+    "arabic": "الفَتَّاحُ",
+    "transliteration": "Al-Fattah",
+    "bs": {
+      "translation": "Onaj koji otvara / Sudac",
+      "explanation": "Onaj koji otvara vrata milosti, uspjeha i znanja, te pravedno presuđuje među Svojim stvorenjima."
+    },
+    "de": {
+      "translation": "Der Öffner / Der Richter",
+      "explanation": "Derjenige, der die Tore der Barmherzigkeit, des Erfolgs und des Wissens öffnet und gerecht urteilt."
+    }
+  },
+  {
+    "id": 19,
+    "arabic": "العَلِيمُ",
+    "transliteration": "Al-Alim",
+    "bs": {
+      "translation": "Sveznajući",
+      "explanation": "Onaj čije znanje obuhvata sve što je bilo, što jeste i što će biti, do najsitnijih detalja i misli u srcima."
+    },
+    "de": {
+      "translation": "Der Allwissende",
+      "explanation": "Derjenige, dessen Wissen alles Vergangene, Gegenwärtige und Zukünftige umfasst, bis hin zu den geheimsten Gedanken."
+    }
+  },
+  {
+    "id": 20,
+    "arabic": "القَابِضُ",
+    "transliteration": "Al-Qabid",
+    "bs": {
+      "translation": "Onaj koji steže / Uskraćuje",
+      "explanation": "Onaj koji po Svojoj mudrosti uskraćuje opskrbu, steže srca ili uzima duše u času smrti."
+    },
+    "de": {
+      "translation": "Der die Gaben verknappt",
+      "explanation": "Derjenige, der nach Seiner Weisheit die Versorgung einschränkt, Herzen verengt oder Seelen im Moment des Todes nimmt."
+    }
+  },
+  {
+    "id": 21,
+    "arabic": "البَاسِطُ",
+    "transliteration": "Al-Basit",
+    "bs": {
+      "translation": "Onaj koji pruža / Širi",
+      "explanation": "Onaj koji obilno dijeli opskrbu, raduje srca i širi Svoju milost kome On hoće."
+    },
+    "de": {
+      "translation": "Der die Gaben reichlich gibt",
+      "explanation": "Derjenige, der die Versorgung großzügig verteilt, Herzen erfreut und Seine Barmherzigkeit ausdehnt."
+    }
+  },
+  {
+    "id": 22,
+    "arabic": "الخَافِضُ",
+    "transliteration": "Al-Khafid",
+    "bs": {
+      "translation": "Onaj koji spušta / Ponižava",
+      "explanation": "Onaj koji spušta i uništava ohole nasilnike i nevjernike, umanjujući njihov značaj."
+    },
+    "de": {
+      "translation": "Der Erniedriger",
+      "explanation": "Derjenige, der die hochmütigen Tyrannen und Ungläubigen erniedrigt und ihre Macht bricht."
+    }
+  },
+  {
+    "id": 23,
+    "arabic": "الرَّافِعُ",
+    "transliteration": "Al-Rafi'",
+    "bs": {
+      "translation": "Onaj koji uzdiže",
+      "explanation": "Onaj koji uzdiže položaj Svojih iskrenih robova, vjernika i učenih, kako na ovom tako i na budućem svijetu."
+    },
+    "de": {
+      "translation": "Der Erhöher",
+      "explanation": "Derjenige, der den Status Seiner aufrichtigen Diener, der Gläubigen und Gelehrten, im Diesseits und Jenseits erhöht."
+    }
+  },
+  {
+    "id": 24,
+    "arabic": "المُعِزُّ",
+    "transliteration": "Al-Mu'izz",
+    "bs": {
+      "translation": "Onaj koji daje čast",
+      "explanation": "Onaj koji daruje snagu, ugled i dostojanstvo onima koji se pokoravaju Njegovim zakonskim propisima."
+    },
+    "de": {
+      "translation": "Der Verleiher der Ehre",
+      "explanation": "Derjenige, der denjenigen Stärke, Ansehen und Würde verleiht, die Seinen Gesetzen folgen."
+    }
+  },
+  {
+    "id": 25,
+    "arabic": "المُذِلُّ",
+    "transliteration": "Al-Mudhill",
+    "bs": {
+      "translation": "Onaj koji ponižava",
+      "explanation": "Onaj koji uskraćuje Svoju pomoć onima koji se ohole, ostavljajući ih u poniženju i sramoti."
+    },
+    "de": {
+      "translation": "Der Erniedriger / Der Poniütiger",
+      "explanation": "Derjenige, der den Hochmütigen Seine Hilfe verwehrt und sie in Schande und Erniedrigung zurücklässt."
+    }
+  },
+  {
+    "id": 26,
+    "arabic": "السَّمِيعُ",
+    "transliteration": "As-Sami'",
+    "bs": {
+      "translation": "Svečujući",
+      "explanation": "Onaj koji čuje apsolutno sve glasove, šaputanja i molitve, bez obzira na jezik, daljinu ili glasnost."
+    },
+    "de": {
+      "translation": "Der Allhörende",
+      "explanation": "Derjenige, der absolut alle Stimmen, Flüstern und Gebete hört, unabhängig von Sprache, Entfernung oder Lautstärke."
+    }
+  },
+  {
+    "id": 27,
+    "arabic": "البَصِيرُ",
+    "transliteration": "Al-Basir",
+    "bs": {
+      "translation": "Svevideći",
+      "explanation": "Onaj koji vidi sve što postoji, pa čak i crnog mrava na crnoj stijeni u najtamnijoj noći."
+    },
+    "de": {
+      "translation": "Der Allsehende",
+      "explanation": "Derjenige, der alles Existierende sieht, selbst eine schwarze Ameise auf einem schwarzen Stein in dunkelster Nacht."
+    }
+  },
+  {
+    "id": 28,
+    "arabic": "الحَكَمُ",
+    "transliteration": "Al-Hakam",
+    "bs": {
+      "translation": "Sudac",
+      "explanation": "Apsolutni i pravedni Sudac čija je presuda konačna i čijoj odluci nema prigovora."
+    },
+    "de": {
+      "translation": "Der Richter",
+      "explanation": "Der absolute und gerechte Richter, dessen Urteil endgültig ist und dessen Entscheidung niemand anfechten kann."
+    }
+  },
+  {
+    "id": 29,
+    "arabic": "العَدْلُ",
+    "transliteration": "Al-Adl",
+    "bs": {
+      "translation": "Pravedni",
+      "explanation": "Onaj koji posjeduje savršenu pravdu, ne čini nepravdu nikome i sve postavlja na njegovo odgovarajuće mjesto."
+    },
+    "de": {
+      "translation": "Der Gerechte",
+      "explanation": "Derjenige, der vollkommene Gerechtigkeit besitzt, niemandem Unrecht tut und alles an seinen richtigen Platz setzt."
+    }
+  },
+  {
+    "id": 30,
+    "arabic": "اللَّطِيفُ",
+    "transliteration": "Al-Latif",
+    "bs": {
+      "translation": "Dobrodržeći / Blagi",
+      "explanation": "Onaj koji je izuzetno fin i blag prema Svojim robovima, i koji im pruža dobro na neprimjetne načine."
+    },
+    "de": {
+      "translation": "Der Feinfühlige / Der Gütige",
+      "explanation": "Derjenige, der äußerst feinfühlig und gütig zu Seinen Dienern ist und ihnen Gutes auf unmerkliche Weise zukommen lässt."
+    }
+  },
+  {
+    "id": 31,
+    "arabic": "الخَبِيرُ",
+    "transliteration": "Al-Khabir",
+    "bs": {
+      "translation": "Obaviješteni",
+      "explanation": "Onaj koji je u potpunosti upoznat sa suštinom svih stvari, skrivenim tajnama i unutrašnjim stanjima."
+    },
+    "de": {
+      "translation": "Der Allkundige",
+      "explanation": "Derjenige, der über das innere Wesen aller Dinge, verborgene Geheimnisse und innere Zustände bestens informiert ist."
+    }
+  },
+  {
+    "id": 32,
+    "arabic": "الحَلِيمُ",
+    "transliteration": "Al-Halim",
+    "bs": {
+      "translation": "Blagi / Strpljivi",
+      "explanation": "Onaj koji ne žuri sa kaznom za grijehe Svojih robova, dajući im vremena i priliku za pokajanje."
+    },
+    "de": {
+      "translation": "Der Nachsichtige / Der Milde",
+      "explanation": "Derjenige, der nicht eilt, Sünden zu bestrafen, sondern Seinen Dienern Zeit und Gelegenheit zur Reue gibt."
+    }
+  },
+  {
+    "id": 33,
+    "arabic": "العَظِيمُ",
+    "transliteration": "Al-Azim",
+    "bs": {
+      "translation": "Veličanstveni",
+      "explanation": "Onaj koji posjeduje potpunu veličinu, uzvišenost i dostojanstvo pred kojima je sve ostalo sićušno."
+    },
+    "de": {
+      "translation": "Der Großartige",
+      "explanation": "Derjenige, der vollkommene Größe und Erhabenheit besitzt, vor der alles andere winzig erscheint."
+    }
+  },
+  {
+    "id": 34,
+    "arabic": "الغَفُورُ",
+    "transliteration": "Al-Ghafur",
+    "bs": {
+      "translation": "Svepraštajući",
+      "explanation": "Onaj koji u potpunosti oprašta i najteže grijehe onima koji Mu se iskreno obrate za oprost."
+    },
+    "de": {
+      "translation": "Der Vergebende",
+      "explanation": "Derjenige, der selbst die schwersten Sünden derer vollständig vergibt, die sich Ihm aufrichtig zuwenden."
+    }
+  },
+  {
+    "id": 35,
+    "arabic": "الشَّكُورُ",
+    "transliteration": "Ash-Shakur",
+    "bs": {
+      "translation": "Zahvalni",
+      "explanation": "Onaj koji višestruko nagrađuje i najmanje dobro djelo Svojih robova, cijeneći njihov trud."
+    },
+    "de": {
+      "translation": "Der Dankbare",
+      "explanation": "Derjenige, der selbst die geringste gute Tat Seiner Diener reichlich belohnt und ihre Bemühungen schätzt."
+    }
+  },
+  {
+    "id": 36,
+    "arabic": "العَلِيُّ",
+    "transliteration": "Al-Aliyy",
+    "bs": {
+      "translation": "Svevišnji",
+      "explanation": "Onaj koji je po Svojoj suštini, osobinama i moći iznad svega stvorenog, na najvišem stepenu uzvišenosti."
+    },
+    "de": {
+      "translation": "Der Hohe / Der Erhabene",
+      "explanation": "Derjenige, der in Seinem Wesen, Seinen Eigenschaften und Seiner Macht über allem Erschaffenen steht."
+    }
+  },
+  {
+    "id": 37,
+    "arabic": "الكَبِيرُ",
+    "transliteration": "Al-Kabir",
+    "bs": {
+      "translation": "Veliki",
+      "explanation": "Onaj čijoj veličini nema granica i koga nijedan razum ne može u potpunosti obuhvatiti ni pojmiti."
+    },
+    "de": {
+      "translation": "Der Große",
+      "explanation": "Derjenige, dessen Größe keine Grenzen kennt und den kein Verstand vollständig erfassen kann."
+    }
+  },
+  {
+    "id": 38,
+    "arabic": "الحَفِيظُ",
+    "transliteration": "Al-Hafiz",
+    "bs": {
+      "translation": "Zaštitnik / Čuvar",
+      "explanation": "Onaj koji čuva cijeli kosmos od propasti, i koji bilježi i čuva svako djelo Svojih stvorenja."
+    },
+    "de": {
+      "translation": "Der Hüter / Der Bewahrer",
+      "explanation": "Derjenige, der das gesamte Universum vor dem Untergang bewahrt und jede Tat Seiner Geschöpfe aufzeichnet."
+    }
+  },
+  {
+    "id": 39,
+    "arabic": "المُقِيتُ",
+    "transliteration": "Al-Muqit",
+    "bs": {
+      "translation": "Opskrbitelj / Svjedok",
+      "explanation": "Onaj koji stvara i daje duhovnu i materijalnu hranu svim stvorenjima, i kontroliše sve procese."
+    },
+    "de": {
+      "translation": "Der Ernährer / Der Erhalter",
+      "explanation": "Derjenige, der allen Geschöpfen sowohl geistige als auch materielle Nahrung schenkt und alles erhält."
+    }
+  },
+  {
+    "id": 40,
+    "arabic": "الحَسِيبُ",
+    "transliteration": "Al-Hasib",
+    "bs": {
+      "translation": "Obračunac",
+      "explanation": "Onaj koji je dovoljan Svojim robovima kao zaštita i koji će precizno svoditi račune na Sudnjem danu."
+    },
+    "de": {
+      "translation": "Der Berechner / Der Genügende",
+      "explanation": "Derjenige, der Seinen Dienern als Schutz genügt und am Jüngsten Tag präzise Abrechnung halten wird."
+    }
+  },
+  {
+    "id": 41,
+    "arabic": "الجَلِيلُ",
+    "transliteration": "Al-Jalil",
+    "bs": {
+      "translation": "Veličanstveni",
+      "explanation": "Onaj koji posjeduje osobine savršenstva, uzvišenosti i veličanstvenosti koje izazivaju strahopoštovanje."
+    },
+    "de": {
+      "translation": "Der Majestätische",
+      "explanation": "Derjenige, der die Eigenschaften der Vollkommenheit und erhabenen Erhabenheit besitzt, die Ehrfurcht gebieten."
+    }
+  },
+  {
+    "id": 42,
+    "arabic": "الكَرِيمُ",
+    "transliteration": "Al-Karim",
+    "bs": {
+      "translation": "Plemeniti / Plemeniti Darovalac",
+      "explanation": "Onaj koji obilno daruje i preko granica očekivanja, prašta grijehe i plemenito se odnosi prema robovima."
+    },
+    "de": {
+      "translation": "Der Großzügige / Der Edelmütige",
+      "explanation": "Derjenige, der über alle Erwartungen hinaus reichlich schenkt, Sünden vergibt und edelmütig handelt."
+    }
+  },
+  {
+    "id": 43,
+    "arabic": "الرَّقِيبُ",
+    "transliteration": "Ar-Raqib",
+    "bs": {
+      "translation": "Budni / Nadzornik",
+      "explanation": "Onaj od koga se ništa ne može sakriti, koji neprestano nadgleda i prati sve što stvorenja čine."
+    },
+    "de": {
+      "translation": "Der Wachsame",
+      "explanation": "Derjenige, vor dem nichts verborgen bleibt und der ununterbrochen alles überwacht, was Seine Geschöpfe tun."
+    }
+  },
+  {
+    "id": 44,
+    "arabic": "المُجِيبُ",
+    "transliteration": "Al-Mujib",
+    "bs": {
+      "translation": "Onaj koji se odaziva",
+      "explanation": "Onaj koji prima molitve Svojih robova i odgovara na njihove vapaje, potrebe i molbe."
+    },
+    "de": {
+      "translation": "Der Erhörer",
+      "explanation": "Derjenige, der die Gebete Seiner Diener annimmt und auf ihre Rufe, Bedürfnisse und Bitten antwortet."
+    }
+  },
+  {
+    "id": 45,
+    "arabic": "الوَاسِعُ",
+    "transliteration": "Al-Wasi'",
+    "bs": {
+      "translation": "Sveobuhvatni",
+      "explanation": "Onaj čije su znanje, milost, opskrba i bogatstvo bezgranični i obuhvataju čitav univerzum."
+    },
+    "de": {
+      "translation": "Der Allumfassende",
+      "explanation": "Derjenige, dessen Wissen, Barmherzigkeit, Versorgung und Reichtum grenzenlos sind und das gesamte Universum umfassen."
+    }
+  },
+  {
+    "id": 46,
+    "arabic": "الحَكِيمُ",
+    "transliteration": "Al-Hakim",
+    "bs": {
+      "translation": "Mudri",
+      "explanation": "Onaj čija su djela, naredbe i stvaranje prožeti savršenom mudrošću i koji sve postavlja na pravo mjesto."
+    },
+    "de": {
+      "translation": "Der Weise",
+      "explanation": "Derjenige, dessen Taten, Befehle und Schöpfung von vollkommener Weisheit durchdrungen sind."
+    }
+  },
+  {
+    "id": 47,
+    "arabic": "الوَدُودُ",
+    "transliteration": "Al-Wadud",
+    "bs": {
+      "translation": "Voljeni / Koji voli",
+      "explanation": "Onaj koji istinski voli Svoje vjerne robove, obasipa ih ljubavlju i čini da oni vole Njega."
+    },
+    "de": {
+      "translation": "Der Liebende",
+      "explanation": "Derjenige, der Seine gläubigen Diener aufrichtig liebt, sie mit Liebe überschüttet und ihre Liebe zu Ihm weckt."
+    }
+  },
+  {
+    "id": 48,
+    "arabic": "المَجِيدُ",
+    "transliteration": "Al-Majid",
+    "bs": {
+      "translation": "Slavljeni",
+      "explanation": "Onaj koji posjeduje potpunu slavu, čast, dostojanstvo i čija su djela vrhunac dobrote."
+    },
+    "de": {
+      "translation": "Der Ruhmreiche",
+      "explanation": "Derjenige, der vollkommenen Ruhm, Ehre und Würde besitzt und dessen Taten der Gipfel der Güte sind."
+    }
+  },
+  {
+    "id": 49,
+    "arabic": "البَاعِثُ",
+    "transliteration": "Al-Ba'ith",
+    "bs": {
+      "translation": "Proživitelj",
+      "explanation": "Onaj koji će na Sudnjem danu proživjeti sve mrtve iz njihovih kaburova radi polaganja računa."
+    },
+    "de": {
+      "translation": "Der Auferwecker",
+      "explanation": "Derjenige, der am Jüngsten Tag alle Toten aus ihren Gräbern auferwecken wird, um Rechenschaft abzulegen."
+    }
+  },
+  {
+    "id": 50,
+    "arabic": "الشَّهِيدُ",
+    "transliteration": "Ash-Shahid",
+    "bs": {
+      "translation": "Svjedok",
+      "explanation": "Onaj koji prisustvuje svemu, svjedoči svakom događaju i čijem oku ništa ne promiče."
+    },
+    "de": {
+      "translation": "Der Zeuge",
+      "explanation": "Derjenige, der bei allem anwesend ist, jedes Ereignis bezeugt und vor dessen Augen nichts verborgen bleibt."
+    }
+  },
+  {
+    "id": 51,
+    "arabic": "الحَقُّ",
+    "transliteration": "Al-Haqq",
+    "bs": {
+      "translation": "Istina",
+      "explanation": "Jedina stvarna i apsolutna Istina, čije je postojanje vječno, a Njegova riječ i obećanje su neprikosnoveni."
+    },
+    "de": {
+      "translation": "Der Wahrhaftige / Die Wahrheit",
+      "explanation": "Die einzig wahre und absolute Wahrheit, deren Existenz ewig ist und deren Wort und Versprechen unumstößlich sind."
+    }
+  },
+  {
+    "id": 52,
+    "arabic": "الوَكِيلُ",
+    "transliteration": "Al-Wakil",
+    "bs": {
+      "translation": "Staratelj / Zaštitnik",
+      "explanation": "Onaj koji se najbolje brine o poslovima Svojih robova i kome se vjernici s punim povjerenjem prepuštaju."
+    },
+    "de": {
+      "translation": "Der Sachwalter / Der Vormund",
+      "explanation": "Derjenige, der sich am besten um die Angelegenheiten Seiner Diener kümmert und dem sich die Gläubigen anvertrauen."
+    }
+  },
+  {
+    "id": 53,
+    "arabic": "القَوِيُّ",
+    "transliteration": "Al-Qawiyy",
+    "bs": {
+      "translation": "Jaki / Moćni",
+      "explanation": "Onaj koji posjeduje potpunu i savršenu snagu, koja nikada ne slabi niti se umara."
+    },
+    "de": {
+      "translation": "Der Starke",
+      "explanation": "Derjenige, der vollkommene und makellose Stärke besitzt, die niemals nachlässt oder ermüdet."
+    }
+  },
+  {
+    "id": 54,
+    "arabic": "المَتِينُ",
+    "transliteration": "Al-Matin",
+    "bs": {
+      "translation": "Čvrsti / Nepokolebljivi",
+      "explanation": "Onaj čija je snaga stabilna, čvrsta i nepokolebljiva, i niko ne može ugroziti Njegovu moć."
+    },
+    "de": {
+      "translation": "Der Feste / Der Beständige",
+      "explanation": "Derjenige, dessen Stärke stabil, fest und unerschütterlich ist, und dessen Macht niemand gefährden kann."
+    }
+  },
+  {
+    "id": 55,
+    "arabic": "الوَلِيُّ",
+    "transliteration": "Al-Waliyy",
+    "bs": {
+      "translation": "Zaštitnik / Prijatelj",
+      "explanation": "Bliski i odani Prijatelj vjernika, koji im pomaže, podržava ih i izvodi ih iz tmina na svjetlo."
+    },
+    "de": {
+      "translation": "Der helfende Freund / Der Schutzherr",
+      "explanation": "Der nahe und treue Freund der Gläubigen, der ihnen hilft, sie unterstützt und sie aus der Dunkelheit ins Licht führt."
+    }
+  },
+  {
+    "id": 56,
+    "arabic": "الحَمِيدُ",
+    "transliteration": "Al-Hamid",
+    "bs": {
+      "translation": "Hvaljeni",
+      "explanation": "Jedini istinski dostojan hvale i zahvale za Svoju suštinu, osobine i bezbrojna dobročinstva."
+    },
+    "de": {
+      "translation": "Der Lobenswerte",
+      "explanation": "Der Einzige, der aufgrund Seines Wesens, Seiner Eigenschaften und Seiner unzähligen Wohltaten des Lobes würdig ist."
+    }
+  },
+  {
+    "id": 57,
+    "arabic": "المُحْصِي",
+    "transliteration": "Al-Muhsi",
+    "bs": {
+      "translation": "Onaj koji sve obuhvata i broji",
+      "explanation": "Onaj koji zna tačan broj svih stvorenja, svih njihovih djela, udisaja i pokreta, i ništa ne zaboravlja."
+    },
+    "de": {
+      "translation": "Der alles Aufzeichnende / Der Zähler",
+      "explanation": "Derjenige, der die genaue Anzahl aller Geschöpfe, ihrer Taten, Atemzüge und Bewegungen kennt und nichts vergisst."
+    }
+  },
+  {
+    "id": 58,
+    "arabic": "المُبْدِئُ",
+    "transliteration": "Al-Mubdi'",
+    "bs": {
+      "translation": "Začetnik / Izumitelj",
+      "explanation": "Onaj koji započinje proces stvaranja bez ikakvog prethodnog modela ili uzorka."
+    },
+    "de": {
+      "translation": "Der Urheber / Der Initiator",
+      "explanation": "Derjenige, der den Schöpfungsprozess ohne jegliches Vorbild oder Modell beginnt."
+    }
+  },
+  {
+    "id": 59,
+    "arabic": "المُعِيدُ",
+    "transliteration": "Al-Mu'id",
+    "bs": {
+      "translation": "Povratnik / Obnovitelj",
+      "explanation": "Onaj koji će nakon smrti ponovo proživjeti i vratiti u život sva stvorenja u istom obliku."
+    },
+    "de": {
+      "translation": "Der Wiederhersteller",
+      "explanation": "Derjenige, der nach dem Tod alle Geschöpfe in gleicher Gestalt wiederbeleben und ins Leben zurückbringen wird."
+    }
+  },
+  {
+    "id": 60,
+    "arabic": "المُحْيِي",
+    "transliteration": "Al-Muhyi",
+    "bs": {
+      "translation": "Onaj koji daje život",
+      "explanation": "Onaj koji oživljava mrtvu materiju, daruje život i oživljava srca spoznajom i imanom."
+    },
+    "de": {
+      "translation": "Der Lebensspender",
+      "explanation": "Derjenige, der toter Materie Leben einhaucht, Leben schenkt und Herzen mit Erkenntnis und Glauben belebt."
+    }
+  },
+  {
+    "id": 61,
+    "arabic": "المُمِيتُ",
+    "transliteration": "Al-Mumit",
+    "bs": {
+      "translation": "Onaj koji daje smrt",
+      "explanation": "Onaj koji određuje kraj života Svojim stvorenjima i uzima njihove duše kada nastupi njihov rok."
+    },
+    "de": {
+      "translation": "Der Todbringer",
+      "explanation": "Derjenige, der das Ende des Lebens Seiner Geschöpfe bestimmt und ihre Seelen nimmt, wenn ihre Zeit abgelaufen ist."
+    }
+  },
+  {
+    "id": 62,
+    "arabic": "الحَيُّ",
+    "transliteration": "Al-Hayy",
+    "bs": {
+      "translation": "Živi",
+      "explanation": "Onaj koji posjeduje vječni život bez početka i bez kraja, i koji nikada ne umire."
+    },
+    "de": {
+      "translation": "Der Lebendige",
+      "explanation": "Derjenige, der ein ewiges Leben ohne Anfang und ohne Ende besitzt und der niemals stirbt."
+    }
+  },
+  {
+    "id": 63,
+    "arabic": "القَيُّومُ",
+    "transliteration": "Al-Qayyum",
+    "bs": {
+      "translation": "Samoopstojeći / Održavatelj",
+      "explanation": "Onaj koji sam o sebi opstoji i koji održava čitav svemir i brine o opstanku svih stvorenja."
+    },
+    "de": {
+      "translation": "Der Beständige / Der Versorger",
+      "explanation": "Derjenige, der aus Sich Selbst heraus existiert und das gesamte Universum erhält und versorgt."
+    }
+  },
+  {
+    "id": 64,
+    "arabic": "الوَاجِدُ",
+    "transliteration": "Al-Wajid",
+    "bs": {
+      "translation": "Nalazač / Bogati",
+      "explanation": "Onaj kome ništa ne nedostaje, koji nalazi sve što poželi i čijem bogatstvu nema kraja."
+    },
+    "de": {
+      "translation": "Der Finder / Der Wohlhabende",
+      "explanation": "Derjenige, dem es an nichts mangelt, der alles findet, was Er will, und dessen Reichtum endlos ist."
+    }
+  },
+  {
+    "id": 65,
+    "arabic": "المَاجِدُ",
+    "transliteration": "Al-Majid",
+    "bs": {
+      "translation": "Slavni / Plemeniti",
+      "explanation": "Onaj koji posjeduje veliko dostojanstvo, čast, obilnu dobrotu i beskrajnu plemenitost."
+    },
+    "de": {
+      "translation": "Der Glorreiche / Der Edle",
+      "explanation": "Derjenige, der große Würde, Ehre, reichliche Güte und unendlichen Edelmut besitzt."
+    }
+  },
+  {
+    "id": 66,
+    "arabic": "الوَاحِدُ",
+    "transliteration": "Al-Wahid",
+    "bs": {
+      "translation": "Jedinstveni",
+      "explanation": "Jedan i jedinstven u Svojoj suštini, osobinama i djelima, bez ikakvog sudruga."
+    },
+    "de": {
+      "translation": "Der Einzige",
+      "explanation": "Der Eine und Einzigartige in Seinem Wesen, Seinen Eigenschaften und Seinen Taten, ohne Gefährten."
+    }
+  },
+  {
+    "id": 67,
+    "arabic": "الأَحَدُ",
+    "transliteration": "Al-Ahad",
+    "bs": {
+      "translation": "Jedan / Jedini",
+      "explanation": "Jedan i neponovljiv, koji je nedjeljiv i nema nikoga sličnog niti ravnog Sebi."
+    },
+    "de": {
+      "translation": "Der Eine",
+      "explanation": "Der Eine, Unteilbare, dem niemand gleicht oder ebenbürtig ist."
+    }
+  },
+  {
+    "id": 68,
+    "arabic": "الصَّمَدُ",
+    "transliteration": "As-Samad",
+    "bs": {
+      "translation": "Utočište / Apsolutni Gospodar",
+      "explanation": "Onaj kome se svi obraćaju za svoje potrebe, a On ne ovisi ni o kome i nema nikakvih potreba."
+    },
+    "de": {
+      "translation": "Der Ewige / Der Unabhängige",
+      "explanation": "Derjenige, an den sich alle mit ihren Bedürfnissen wenden, während Er von niemandem abhängt."
+    }
+  },
+  {
+    "id": 69,
+    "arabic": "القَادِرُ",
+    "transliteration": "Al-Qadir",
+    "bs": {
+      "translation": "Moćni",
+      "explanation": "Onaj koji posjeduje apsolutnu moć da uradi sve što želi, i ništa Ga ne može spriječiti."
+    },
+    "de": {
+      "translation": "Der Mächtige",
+      "explanation": "Derjenige, der die absolute Macht besitzt, alles zu tun, was Er will, ohne dass Ihn etwas hindern kann."
+    }
+  },
+  {
+    "id": 70,
+    "arabic": "المُقْتَدِرُ",
+    "transliteration": "Al-Muqtadir",
+    "bs": {
+      "translation": "Svemogući",
+      "explanation": "Onaj koji Svoju savršenu moć pokazuje kroz stvaranje, održavanje i upravljanje cjelokupnim svemirom."
+    },
+    "de": {
+      "translation": "Der Schöpfer aller Macht / Der Allmächtige",
+      "explanation": "Derjenige, der Seine vollkommene Macht durch die Erschaffung und Verwaltung des Universums zeigt."
+    }
+  },
+  {
+    "id": 71,
+    "arabic": "المُقَدِّمُ",
+    "transliteration": "Al-Muqaddim",
+    "bs": {
+      "translation": "Onaj koji unapređuje / Stavllja ispred",
+      "explanation": "Onaj koji postavlja stvari ispred drugih na osnovu Svoje mudrosti, bilo u prostoru, vremenu ili statusu."
+    },
+    "de": {
+      "translation": "Der Beförderer / Der Voranstellende",
+      "explanation": "Derjenige, der Dinge nach Seiner Weisheit voranstellt, sei es in Raum, Zeit oder Status."
+    }
+  },
+  {
+    "id": 72,
+    "arabic": "المُؤَخِّرُ",
+    "transliteration": "Al-Mu'akhkhir",
+    "bs": {
+      "translation": "Onaj koji zapostavlja / Odgađa",
+      "explanation": "Onaj koji odgađa stvari i postavlja ih iza drugih u skladu sa Svojim pravednim planom."
+    },
+    "de": {
+      "translation": "Der Verzögerer / Der Zurückstellende",
+      "explanation": "Derjenige, der Dinge nach Seinem gerechten Plan verzögert und zurückstellt."
+    }
+  },
+  {
+    "id": 73,
+    "arabic": "الأَوَّلُ",
+    "transliteration": "Al-Awwal",
+    "bs": {
+      "translation": "Prvi",
+      "explanation": "Onaj koji postoji prije svega stvorenog, čijem postojanju nema početka."
+    },
+    "de": {
+      "translation": "Der Erste",
+      "explanation": "Derjenige, der vor allem Erschaffenen existierte und dessen Existenz keinen Anfang hat."
+    }
+  },
+  {
+    "id": 74,
+    "arabic": "الآخِرُ",
+    "transliteration": "Al-Akhir",
+    "bs": {
+      "translation": "Posljednji",
+      "explanation": "Onaj koji ostaje nakon što sve stvoreno nestane, čijem postojanju nema kraja."
+    },
+    "de": {
+      "translation": "Der Letzte",
+      "explanation": "Derjenige, der fortbesteht, nachdem alles Erschaffene vergangen ist, und dessen Existenz kein Ende hat."
+    }
+  },
+  {
+    "id": 75,
+    "arabic": "الظَّاهِرُ",
+    "transliteration": "Az-Zahir",
+    "bs": {
+      "translation": "Vidljivi / Jasni",
+      "explanation": "Onaj čije je postojanje očigledno i jasno kroz dokaze u prirodi i svemiru."
+    },
+    "de": {
+      "translation": "Der Offenbare",
+      "explanation": "Derjenige, dessen Existenz durch die Beweise in der Natur und im Universum offensichtlich und klar ist."
+    }
+  },
+  {
+    "id": 76,
+    "arabic": "البَاطِنُ",
+    "transliteration": "Al-Batin",
+    "bs": {
+      "translation": "Skriveni",
+      "explanation": "Onaj koji je skriven od čula stvorenja na ovom svijetu, i koga niko ne može vidjeti."
+    },
+    "de": {
+      "translation": "Der Verborgene",
+      "explanation": "Derjenige, der in dieser Welt vor den Sinnen der Geschöpfe verborgen ist und den niemand physisch sehen kann."
+    }
+  },
+  {
+    "id": 77,
+    "arabic": "الوَالِي",
+    "transliteration": "Al-Wali",
+    "bs": {
+      "translation": "Upravitelj",
+      "explanation": "Gospodar i Upravitelj koji usmjerava sve događaje u kosmosu i vlada svime."
+    },
+    "de": {
+      "translation": "Der Herrscher / Der Schutzherr",
+      "explanation": "Der Herr und Lenker, der alle Ereignisse im Kosmos leitet und über alles herrscht."
+    }
+  },
+  {
+    "id": 78,
+    "arabic": "المُتَعَالِي",
+    "transliteration": "Al-Muta'ali",
+    "bs": {
+      "translation": "Najuzvišeniji",
+      "explanation": "Onaj koji je iznad svih izmišljotina, sumnji i nesavršenstava koje Mu nevjernici pripisuju."
+    },
+    "de": {
+      "translation": "Der Höchste / Der Erhabene",
+      "explanation": "Derjenige, der weit über allen Vorstellungen, Zweifeln und Unzulänglichkeiten steht."
+    }
+  },
+  {
+    "id": 79,
+    "arabic": "البَرُّ",
+    "transliteration": "Al-Barr",
+    "bs": {
+      "translation": "Dobročinitelj",
+      "explanation": "Onaj koji je izvor svakog dobra i dobročinstva, izuzetno blag i darežljiv prema stvorenjima."
+    },
+    "de": {
+      "translation": "Der Gütige / Der Wohltäter",
+      "explanation": "Derjenige, der die Quelle allen Guten ist, äußerst mild und großzügig zu Seinen Geschöpfen."
+    }
+  },
+  {
+    "id": 80,
+    "arabic": "التَّوَّابُ",
+    "transliteration": "At-Tawwab",
+    "bs": {
+      "translation": "Primatelj pokajanja",
+      "explanation": "Onaj koji stalno potiče Svoje robove na pokajanje i rado ga prima od onih koji se iskreno pokaju."
+    },
+    "de": {
+      "translation": "Der Reue-Annehmende",
+      "explanation": "Derjenige, der Seine Diener stetig zur Reue führt und sie von denjenigen, die aufrichtig bereuen, annimmt."
+    }
+  },
+  {
+    "id": 81,
+    "arabic": "المُنْتَقِمُ",
+    "transliteration": "Al-Muntaqim",
+    "bs": {
+      "translation": "Osvetnik",
+      "explanation": "Pravedni Osvetnik koji kažnjava nevjernike i ohole nasilnike nakon što im pošalje jasna upozorenja."
+    },
+    "de": {
+      "translation": "Der Vergeltende / Der Rächer",
+      "explanation": "Der gerechte Vergeltende, der die Ungerechten nach deutlichen Warnungen bestraft."
+    }
+  },
+  {
+    "id": 82,
+    "arabic": "العَفُوُّ",
+    "transliteration": "Al-Afuww",
+    "bs": {
+      "translation": "Onaj koji briše grijehe",
+      "explanation": "Onaj koji potpuno briše grijehe Svojih robova kao da nikada nisu ni postojali, prelazeći preko njih."
+    },
+    "de": {
+      "translation": "Der Verzeihende / Der Tilger der Sünden",
+      "explanation": "Derjenige, der die Sünden Seiner Diener vollständig auslöscht, als ob sie nie existiert hätten."
+    }
+  },
+  {
+    "id": 83,
+    "arabic": "الرَّؤُوفُ",
+    "transliteration": "Ar-Ra'uf",
+    "bs": {
+      "translation": "Blagi / Milosrdni",
+      "explanation": "Onaj čija je milost izuzetno blaga, nježna i graniči sa krajnjim saosjećanjem prema stvorenjima."
+    },
+    "de": {
+      "translation": "Der Mitleidige / Der Gütige",
+      "explanation": "Derjenige, dessen Barmherzigkeit äußerst mild, sanft und von tiefstem Mitgefühl geprägt is."
+    }
+  },
+  {
+    "id": 84,
+    "arabic": "مَالِكُ المُلْكِ",
+    "transliteration": "Malik-ul-Mulk",
+    "bs": {
+      "translation": "Vladar Vlasti / Gospodar svemira",
+      "explanation": "Jedini i apsolutni vlasnik cjelokupnog svemira, koji upravlja svim svjetovima i carstvima bez posrednika."
+    },
+    "de": {
+      "translation": "Der Herrscher des Königreichs",
+      "explanation": "Der einzige und absolute Besitzer des gesamten Universums, der über alle Welten ohne Vermittler herrscht."
+    }
+  },
+  {
+    "id": 85,
+    "arabic": "ذُو الجَلَالِ وَالإِكْرَامِ",
+    "transliteration": "Dhul-Jalali wal-Ikram",
+    "bs": {
+      "translation": "Posjednik Veličanstva i Časti",
+      "explanation": "Onaj koji posjeduje apsolutnu veličinu, uzvišenost, i koji zaslužuje da Mu se iskazuje najveće poštovanje i počast."
+    },
+    "de": {
+      "translation": "Der Besitzer von Majestät und Ehre",
+      "explanation": "Derjenige, der absolute Größe und Erhabenheit besitzt und dem größter Respekt und Ehre gebühren."
+    }
+  },
+  {
+    "id": 86,
+    "arabic": "المُقْسِطُ",
+    "transliteration": "Al-Muqsit",
+    "bs": {
+      "translation": "Pravedni / Usklađivač",
+      "explanation": "Pravedni Vladar koji uspostavlja potpunu ravnotežu i pravdu, štiteći potlačene od tlačitelja."
+    },
+    "de": {
+      "translation": "Der unparteiisch Richtende",
+      "explanation": "Der gerechte Herrscher, der vollkommene Ausgewogenheit herstellt und die Unterdrückten vor Unterdrückern schützt."
+    }
+  },
+  {
+    "id": 87,
+    "arabic": "الجَامِعُ",
+    "transliteration": "Al-Jami'",
+    "bs": {
+      "translation": "Sakupljač",
+      "explanation": "Onaj koji će sakupiti sva stvorenja na Sudnjem danu na jednom mjestu radi polaganja računa."
+    },
+    "de": {
+      "translation": "Der Versammler",
+      "explanation": "Derjenige, der alle Geschöpfe am Jüngsten Tag an einem Ort versammeln wird, um Rechenschaft abzulegen."
+    }
+  },
+  {
+    "id": 88,
+    "arabic": "الغَنِيُّ",
+    "transliteration": "Al-Ghaniyy",
+    "bs": {
+      "translation": "Bogati / Neovisni",
+      "explanation": "Apsolutno bogati Gospodar koji ni o kome i ni o čemu ne ovisi, dok sve drugo ovisi o Njemu."
+    },
+    "de": {
+      "translation": "Der Reiche / Der Unbedürftige",
+      "explanation": "Der absolut reiche Herr, der von niemandem abhängt, während alles andere von Ihm abhängig ist."
+    }
+  },
+  {
+    "id": 89,
+    "arabic": "المُغْنِي",
+    "transliteration": "Al-Mughni",
+    "bs": {
+      "translation": "Onaj koji bogati",
+      "explanation": "Onaj koji Svojom milošću i opskrbom obogaćuje stvorenja, dajući im duhovno i materijalno bogatstvo."
+    },
+    "de": {
+      "translation": "Der Reichmachende",
+      "explanation": "Derjenige, der Seine Geschöpfe mit Seiner Gnade beschenkt und ihnen geistigen und materiellen Reichtum verleiht."
+    }
+  },
+  {
+    "id": 90,
+    "arabic": "المَانِعُ",
+    "transliteration": "Al-Mani'",
+    "bs": {
+      "translation": "Onaj koji sprječava / Brani",
+      "explanation": "Onaj koji po Svojoj mudrosti sprječava štetne stvari da pogode Svoje robove ili im uskraćuje ono što nije dobro za njih."
+    },
+    "de": {
+      "translation": "Der Verwehrer / Der Schützer",
+      "explanation": "Derjenige, der nach Seiner Weisheit schädliche Dinge von Seinen Dienern abwendet oder ihnen verwehrt, was nicht gut für sie ist."
+    }
+  },
+  {
+    "id": 91,
+    "arabic": "الضَّارُّ",
+    "transliteration": "Ad-Darr",
+    "bs": {
+      "translation": "Onaj koji šteti / Koji stvara štetu",
+      "explanation": "Onaj bez čije volje i određenja niko ne može pretrpjeti nikakvu štetu niti iskušenje na ovom svijetu."
+    },
+    "de": {
+      "translation": "Der Schadenbringende / Der Prüfende",
+      "explanation": "Derjenige, ohne dessen Willen und Bestimmung niemand Schaden oder Prüfungen in dieser Welt erleiden kann."
+    }
+  },
+  {
+    "id": 92,
+    "arabic": "النَّافِعُ",
+    "transliteration": "An-Nafi'",
+    "bs": {
+      "translation": "Koristan / Izvor koristi",
+      "explanation": "Onaj koji stvara svaku korist, napredak i dobro, i daruje ih kome On hoće."
+    },
+    "de": {
+      "translation": "Der Nutzenspendende",
+      "explanation": "Derjenige, der jeden Nutzen, Fortschritt und Gutes erschafft und schenkt, wem Er will."
+    }
+  },
+  {
+    "id": 93,
+    "arabic": "النُّورُ",
+    "transliteration": "An-Nur",
+    "bs": {
+      "translation": "Svjetlost",
+      "explanation": "Onaj koji osvjetljava nebesa i Zemlju Svojim nurom, i koji upućuje srca vjernika na pravi put."
+    },
+    "de": {
+      "translation": "Das Licht",
+      "explanation": "Derjenige, der Himmel und Erde mit Seinem Licht erhellt und die Herzen der Gläubigen auf den rechten Weg leitet."
+    }
+  },
+  {
+    "id": 94,
+    "arabic": "الهَادِي",
+    "transliteration": "Al-Hadi",
+    "bs": {
+      "translation": "Vodič / Upućivač",
+      "explanation": "Onaj koji upućuje Svoja stvorenja na ono što im donosi korist i vodi vjernike ka spoznaji Istine."
+    },
+    "de": {
+      "translation": "Der Wegweiser / Der Führende",
+      "explanation": "Derjenige, der Seine Geschöpfe zu dem führt, was ihnen nützt, und die Gläubigen zur Erkenntnis der Wahrheit leitet."
+    }
+  },
+  {
+    "id": 95,
+    "arabic": "البَدِيعُ",
+    "transliteration": "Al-Badi'",
+    "bs": {
+      "translation": "Prekrasni Stvoritelj / Nedostižni",
+      "explanation": "Onaj koji stvara veličanstvena i neviđena stvorenja bez ikakvog uzora, u savršenoj ljepoti."
+    },
+    "de": {
+      "translation": "Der Schöpfer des Neuen / Der Einzigartige",
+      "explanation": "Derjenige, der prachtvolle Geschöpfe ohne Vorbild in vollkommener Schönheit erschafft."
+    }
+  },
+  {
+    "id": 96,
+    "arabic": "البَاقِي",
+    "transliteration": "Al-Baqi",
+    "bs": {
+      "translation": "Vječni / Trajni",
+      "explanation": "Onaj koji ostaje zauvijek, čije postojanje ne prestaje i ne podliježe promjenama vremena."
+    },
+    "de": {
+      "translation": "Der Ewige / Der Bleibende",
+      "explanation": "Derjenige, der für immer bleibt, dessen Existenz niemals endet und der keinen zeitlichen Veränderungen unterliegt."
+    }
+  },
+  {
+    "id": 97,
+    "arabic": "الوَارِثُ",
+    "transliteration": "Al-Warith",
+    "bs": {
+      "translation": "Nasljednik",
+      "explanation": "Onaj kome sve pripada nakon što stvorenja nestanu, stvarni i konačni vlasnik svega postojećeg."
+    },
+    "de": {
+      "translation": "Der Erbe",
+      "explanation": "Derjenige, dem alles zufällt, nachdem die Geschöpfe vergangen sind, der wahre und endgültige Besitzer aller Dinge."
+    }
+  },
+  {
+    "id": 98,
+    "arabic": "الرَّشِيدُ",
+    "transliteration": "Ar-Rashid",
+    "bs": {
+      "translation": "Upućivač na pravi put",
+      "explanation": "Onaj koji nepogrešivo vodi stvorenja ka njihovim ciljevima, i čije su sve odredbe i putevi savršeni."
+    },
+    "de": {
+      "translation": "Der Führende auf den rechten Weg",
+      "explanation": "Derjenige, der die Geschöpfe fehlerfrei zu ihren Zielen führt und dessen Bestimmungen vollkommen sind."
+    }
+  },
+  {
+    "id": 99,
+    "arabic": "الصَّبُورُ",
+    "transliteration": "As-Sabur",
+    "bs": {
+      "translation": "Strpljivi",
+      "explanation": "Onaj koji ne žuri sa kaznom, nego strpljivo čeka pokajanje Svojih robova i daje im vremena."
+    },
+    "de": {
+      "translation": "Der Geduldige",
+      "explanation": "Derjenige, der nicht voreilig straft, sondern geduldig auf die Reue Seiner Diener wartet."
+    }
+  }
+]];
 
     // State variables
     let currentLang = 'bs';
