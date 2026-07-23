@@ -807,6 +807,17 @@
       border-color: var(--accent-color);
     }
 
+    .btn-refresh-pwa {
+      background: rgba(212, 175, 55, 0.15);
+      border: 1px solid var(--accent-color);
+      color: var(--primary-color);
+    }
+
+    .btn-refresh-pwa:hover {
+      background: var(--accent-color);
+      color: var(--primary-dark);
+    }
+
     /* Mobile Sticky Mini-Player */
     .mini-player {
       display: none;
@@ -956,7 +967,7 @@
             </svg>
             <div>
               <h1 class="brand-title">Kur'an Audio</h1>
-              <div class="brand-subtitle">Lokalno & Offline Učenje</div>
+              <div class="brand-subtitle">Lokalno & Offline Učenje (v3)</div>
             </div>
           </div>
           <div class="offline-badge">
@@ -1129,7 +1140,7 @@
               <polyline points="7 10 12 15 17 10"></polyline>
               <line x1="12" y1="15" x2="12" y2="3"></line>
             </svg>
-            <span>Offline Upravljanje & YouTube Linkovi</span>
+            <span>Offline Upravljanje, Ažuriranje & YouTube Linkovi</span>
           </div>
           <p class="tools-desc">
             Možete direktno ugraditi bilo koji YouTube video / audio link za učenje Kur'ana. Unesite link ispod i kliknite <strong>Učitaj YouTube</strong>:
@@ -1141,6 +1152,9 @@
           </div>
 
           <div class="tool-actions" style="margin-top:8px;">
+            <button class="btn-action btn-refresh-pwa" onclick="resetAppAndCache()">
+              🔄 Osvježi PWA / Očisti Keš (Verzija 3)
+            </button>
             <button class="btn-action" onclick="cacheCurrentSurah()">
               💾 Preuzmi trenutnu suru za offline
             </button>
@@ -1364,12 +1378,37 @@
       registerServiceWorker();
     });
 
-    // PWA Service Worker
+    // PWA Service Worker Auto Update
     function registerServiceWorker() {
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('./sw.js')
-          .then(reg => console.log('[PWA] Service Worker registriran:', reg.scope))
+          .then(reg => {
+            console.log('[PWA v3] Service Worker registriran:', reg.scope);
+            reg.update(); // Trigger network check for SW updates
+          })
           .catch(err => console.log('[PWA] Greška pri registraciji SW:', err));
+      }
+    }
+
+    // Force Reset App and Clear Cache for Home Screen PWA
+    function resetAppAndCache() {
+      if (confirm("Da li želite očistiti stari keš i učitati najnoviju verziju plejera sa svim učačima?")) {
+        if ('serviceWorker' in navigator) {
+          navigator.serviceWorker.getRegistrations().then(registrations => {
+            for (let registration of registrations) {
+              registration.unregister();
+            }
+          });
+        }
+        if ('caches' in window) {
+          caches.keys().then(keys => {
+            return Promise.all(keys.map(key => caches.delete(key)));
+          }).then(() => {
+            window.location.reload(true);
+          });
+        } else {
+          window.location.reload(true);
+        }
       }
     }
 
@@ -1709,7 +1748,7 @@
     function cacheCurrentSurah() {
       if ('caches' in window) {
         const currentSrc = audioEl.src;
-        caches.open('kuran-audio-mp3-v1').then(cache => {
+        caches.open('kuran-audio-mp3-v3').then(cache => {
           cache.add(currentSrc).then(() => {
             alert(`Sura ${SURAHS[currentSurahIndex].transliteration} je uspješno preuzeta i sačuvana u pretraživaču za offline rad!`);
           }).catch(err => {
