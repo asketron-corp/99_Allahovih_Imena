@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="bs">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#0d3c26">
+  <meta name="description" content="Samostalni i offline Kur'an Audio Plejer za slušanje učenja Kur'ana u MP3 formatu.">
+  <title>Kur'an Audio Offline (Samostalni Paket)</title>
+
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+    :root {
+      --primary-color: #0d3c26;
+      --primary-dark: #072215;
+      --primary-light: #165337;
+      --accent-color: #d4af37;
+      --accent-hover: #c49f27;
+      --accent-light: #f3e0aa;
+      --bg-color: #f7f6f2;
+      --card-bg: #ffffff;
+      --text-main: #1a2620;
+      --text-muted: #5e6f66;
+      --border-color: #e6e3da;
+      --shadow-sm: 0 2px 8px rgba(7, 34, 21, 0.04);
+      --shadow-md: 0 6px 24px rgba(7, 34, 21, 0.08);
+      --shadow-lg: 0 16px 36px rgba(7, 34, 21, 0.14);
+      --transition-fast: 0.15s ease;
+      --transition-normal: 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Outfit', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-main);
+      height: 100vh;
+      width: 100vw;
+      overflow: hidden;
+      display: flex;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #c5c2b9;
+      border-radius: 10px;
+    }
+
+    .app-layout {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+
+    .sidebar {
+      width: 380px;
+      min-width: 340px;
+      max-width: 440px;
+      background: var(--card-bg);
+      border-right: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      z-index: 10;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .sidebar-header {
+      padding: 20px 20px 16px 20px;
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+      color: #ffffff;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    .header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand-box {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .app-icon-img {
+      width: 40px;
+      height: 40px;
+      filter: drop-shadow(0 2px 6px rgba(0,0,0,0.3));
+    }
+
+    .brand-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: 0.3px;
+      color: #ffffff;
+    }
+
+    .brand-subtitle {
+      font-size: 0.72rem;
+      color: var(--accent-light);
+      font-weight: 500;
+      opacity: 0.9;
+    }
+
+    .search-box {
+      position: relative;
+      width: 100%;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 10px 14px 10px 38px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 12px;
+      color: #ffffff;
+      font-size: 0.9rem;
+      font-family: inherit;
+      outline: none;
+      transition: var(--transition-fast);
+    }
+
+    .search-input::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .search-input:focus {
+      background: rgba(255, 255, 255, 0.18);
+      border-color: var(--accent-color);
+    }
+
+    .search-icon-svg {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      height: 16px;
+      stroke: #ffffff;
+      opacity: 0.7;
+      fill: none;
+    }
+
+    .filter-pills {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+    }
+
+    .filter-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.8);
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      border-radius: 20px;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .filter-btn.active {
+      background: var(--accent-color);
+      color: var(--primary-dark);
+      border-color: var(--accent-color);
+    }
+
+    .offline-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(0,0,0,0.2);
+      padding: 4px 10px;
+      border-radius: 12px;
+    }
+
+    .status-dot {
+      width: 7px;
+      height: 7px;
+      background-color: #2ec4b6;
+      border-radius: 50%;
+    }
+
+    .surah-list {
+      flex: 1;
+      overflow-y: auto;
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      background-color: #faf9f5;
+    }
+
+    .surah-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      transition: var(--transition-fast);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .surah-card:hover {
+      border-color: var(--accent-color);
+      transform: translateY(-1px);
+    }
+
+    .surah-card.active {
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      border-color: var(--accent-color);
+      color: #ffffff;
+    }
+
+    .card-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .surah-num {
+      width: 32px;
+      height: 32px;
+      background: rgba(212, 175, 55, 0.12);
+      color: var(--accent-color);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    .surah-card.active .surah-num {
+      background: rgba(255, 255, 255, 0.2);
+      color: var(--accent-light);
+    }
+
+    .surah-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .surah-title-latin {
+      font-size: 0.95rem;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .surah-translation {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .surah-card.active .surah-translation {
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    .card-right {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 2px;
+      flex-shrink: 0;
+    }
+
+    .surah-arabic-name {
+      font-family: 'Amiri', serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--primary-color);
+      direction: rtl;
+    }
+
+    .surah-card.active .surah-arabic-name {
+      color: var(--accent-color);
+    }
+
+    .surah-info-pill {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      background: #f0eee6;
+      padding: 1px 6px;
+      border-radius: 6px;
+    }
+
+    .surah-card.active .surah-info-pill {
+      background: rgba(255,255,255,0.15);
+      color: rgba(255,255,255,0.85);
+    }
+
+    .main-content {
+      flex: 1;
+      height: 100%;
+      background: var(--bg-color);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .player-container {
+      max-width: 820px;
+      margin: 0 auto;
+      width: 100%;
+      padding: 36px 28px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .surah-hero-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 32px 28px;
+      text-align: center;
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .surah-hero-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color), var(--primary-color));
+    }
+
+    .arabic-circle-frame {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      border: 3px double var(--accent-color);
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+      margin: 0 auto 20px auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: var(--shadow-md);
+    }
+
+    .hero-arabic-title {
+      font-family: 'Amiri', serif;
+      font-size: 3.5rem;
+      color: var(--accent-color);
+      direction: rtl;
+    }
+
+    .hero-surah-number {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: var(--accent-color);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .hero-translit {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+    }
+
+    .hero-translation {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--primary-color);
+      margin-top: 4px;
+    }
+
+    .hero-tags {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .tag-badge {
+      background: #f0eee6;
+      border: 1px solid var(--border-color);
+      color: var(--text-muted);
+      padding: 4px 12px;
+      border-radius: 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    .bismillah-card {
+      background: linear-gradient(135deg, rgba(13,60,38,0.06) 0%, rgba(212,175,55,0.06) 100%);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .bismillah-arabic {
+      font-family: 'Amiri', serif;
+      font-size: 2.2rem;
+      color: var(--primary-dark);
+      direction: rtl;
+    }
+
+    .bismillah-translation {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 6px;
+      font-style: italic;
+    }
+
+    .player-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: var(--shadow-md);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .player-top-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .reciter-select-wrapper {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: #f7f5ed;
+      padding: 6px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border-color);
+    }
+
+    .reciter-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--primary-color);
+    }
+
+    .reciter-select {
+      background: transparent;
+      border: none;
+      font-family: inherit;
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-main);
+      outline: none;
+      cursor: pointer;
+    }
+
+    .seek-container {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .time-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .seek-slider {
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      accent-color: var(--accent-color);
+      cursor: pointer;
+    }
+
+    .controls-main {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .control-btn {
+      background: transparent;
+      border: none;
+      color: var(--primary-color);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: var(--transition-fast);
+      outline: none;
+    }
+
+    .control-btn:hover {
+      background: rgba(13,60,38,0.08);
+      color: var(--accent-color);
+    }
+
+    .btn-play {
+      width: 64px;
+      height: 64px;
+      background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-dark) 100%);
+      color: var(--accent-color);
+      box-shadow: 0 6px 20px rgba(7, 34, 21, 0.25);
+    }
+
+    .btn-play:hover {
+      transform: scale(1.06);
+    }
+
+    .btn-skip {
+      width: 44px;
+      height: 44px;
+    }
+
+    .controls-secondary {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 14px;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .speed-badge, .repeat-badge {
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 14px;
+      background: #f0eee6;
+      border: 1px solid var(--border-color);
+      color: var(--primary-color);
+      cursor: pointer;
+    }
+
+    .mini-player {
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 64px;
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+      color: #ffffff;
+      border-top: 1px solid var(--accent-color);
+      z-index: 50;
+      padding: 0 16px;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .mini-info {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .mini-arabic {
+      font-family: 'Amiri', serif;
+      font-size: 1.4rem;
+      color: var(--accent-color);
+    }
+
+    .mini-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .mini-sub {
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.7);
+    }
+
+    @media (max-width: 768px) {
+      .sidebar { width: 100%; max-width: none; }
+      .main-content { display: none; }
+      .mini-player { display: flex; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-layout">
+    <aside class="sidebar">
+      <div class="sidebar-header">
+        <div class="header-top">
+          <div class="brand-box">
+            <svg class="app-icon-img" viewBox="0 0 512 512">
+              <rect width="512" height="512" rx="120" fill="#072215"/>
+              <circle cx="256" cy="256" r="190" fill="none" stroke="#d4af37" stroke-width="16"/>
+              <text x="256" y="310" font-family="'Amiri', serif" font-size="190" font-weight="bold" fill="#d4af37" text-anchor="middle">القرآن</text>
+            </svg>
+            <div>
+              <h1 class="brand-title">Kur'an Audio</h1>
+              <div class="brand-subtitle">Samostalni Paket za WhatsApp</div>
+            </div>
+          </div>
+          <div class="offline-badge">
+            <div class="status-dot"></div>
+            <span>100% Offline</span>
+          </div>
+        </div>
+
+        <div class="search-box">
+          <svg class="search-icon-svg" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8" stroke-width="2.5"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65" stroke-width="2.5"></line>
+          </svg>
+          <input type="text" class="search-input" id="search-input" placeholder="Pretraži sure..." oninput="onSearchInput()">
+        </div>
+
+        <div class="filter-pills">
+          <button class="filter-btn active" onclick="setFilter('all', this)">Sve (114)</button>
+          <button class="filter-btn" onclick="setFilter('Mekka', this)">Mekka</button>
+          <button class="filter-btn" onclick="setFilter('Medina', this)">Medina</button>
+        </div>
+      </div>
+
+      <div class="surah-list" id="surah-list"></div>
+    </aside>
+
+    <main class="main-content" id="main-content">
+      <div class="player-container">
+        <div class="surah-hero-card">
+          <div class="hero-surah-number" id="hero-num">SURA 001</div>
+          <div class="arabic-circle-frame">
+            <div class="hero-arabic-title" id="hero-arabic">الفاتحة</div>
+          </div>
+          <h2 class="hero-translit" id="hero-translit">Al-Fatiha</h2>
+          <div class="hero-translation" id="hero-trans">Pristup</div>
+          <div class="hero-tags">
+            <span class="tag-badge" id="tag-type">Mekka</span>
+            <span class="tag-badge" id="tag-verses">7 ajeta</span>
+          </div>
+        </div>
+
+        <div class="bismillah-card">
+          <div class="bismillah-arabic">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</div>
+          <div class="bismillah-translation">U ime Allaha, Milostivog, Samilosnog</div>
+        </div>
+
+        <div class="player-card">
+          <div class="player-top-info">
+            <div class="reciter-select-wrapper">
+              <span class="reciter-label">Učač:</span>
+              <select class="reciter-select" id="reciter-select" onchange="changeReciter(this.value)">
+                <option value="mishary">Mishary Rashid Alafasy</option>
+                <option value="abdulbasit">Abdul Basit</option>
+                <option value="ghamdi">Saad Al-Ghamdi</option>
+                <option value="local">Lokalni Audio (audio/*.mp3)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="seek-container">
+            <input type="range" class="seek-slider" id="seek-slider" min="0" max="100" value="0" oninput="onSeek(this.value)">
+            <div class="time-row">
+              <span id="time-current">00:00</span>
+              <span id="time-duration">00:00</span>
+            </div>
+          </div>
+
+          <div class="controls-main">
+            <button class="control-btn btn-skip" onclick="playPrevSurah()">⏮</button>
+            <button class="control-btn btn-play" id="btn-play-main" onclick="togglePlayPause()">▶</button>
+            <button class="control-btn btn-skip" onclick="playNextSurah()">⏭</button>
+          </div>
+
+          <div class="controls-secondary">
+            <div class="speed-badge" id="speed-badge" onclick="cycleSpeed()">Brzina: 1.0x</div>
+            <div class="repeat-badge" id="repeat-badge" onclick="cycleRepeat()">Ponavljanje: Isključeno</div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div class="mini-player" id="mini-player">
+    <div class="mini-info">
+      <span class="mini-arabic" id="mini-arabic">الفاتحة</span>
+      <div>
+        <div class="mini-title" id="mini-title">Al-Fatiha</div>
+        <div class="mini-sub" id="mini-sub">Pristup</div>
+      </div>
+    </div>
+    <button class="control-btn" onclick="togglePlayPause()" style="color:#white; font-size:1.5rem;">▶</button>
+  </div>
+
+  <audio id="audio-element"></audio>
+
+  <script>
+    const SURAHS = [
+      { id: 1, arabic: "الفاتحة", transliteration: "Al-Fatiha", translation: "Pristup", verses: 7, type: "Mekka" },
+      { id: 2, arabic: "البقرة", transliteration: "Al-Baqarah", translation: "Krava", verses: 286, type: "Medina" },
+      { id: 3, arabic: "آل عمران", transliteration: "Ali 'Imran", translation: "Imranova porodica", verses: 200, type: "Medina" },
+      { id: 4, arabic: "النساء", transliteration: "An-Nisa", translation: "Žene", verses: 176, type: "Medina" },
+      { id: 5, arabic: "المائدة", transliteration: "Al-Ma'idah", translation: "Trpeza", verses: 120, type: "Medina" },
+      { id: 6, arabic: "الأنعام", transliteration: "Al-An'am", translation: "Stoka", verses: 165, type: "Mekka" },
+      { id: 7, arabic: "الأعراف", transliteration: "Al-A'raf", translation: "Bedemi", verses: 206, type: "Mekka" },
+      { id: 8, arabic: "الأنفال", transliteration: "Al-Anfal", translation: "Plijen", verses: 75, type: "Medina" },
+      { id: 9, arabic: "التوبة", transliteration: "At-Tawbah", translation: "Pokajanje", verses: 129, type: "Medina" },
+      { id: 10, arabic: "يونس", transliteration: "Yunus", translation: "Yunus", verses: 109, type: "Mekka" },
+      { id: 11, arabic: "هود", transliteration: "Hud", translation: "Hud", verses: 123, type: "Mekka" },
+      { id: 12, arabic: "يوسف", transliteration: "Yusuf", translation: "Yusuf", verses: 111, type: "Mekka" },
+      { id: 13, arabic: "الرعد", transliteration: "Ar-Ra'd", translation: "Grom", verses: 43, type: "Medina" },
+      { id: 14, arabic: "إبراهيم", transliteration: "Ibrahim", translation: "Ibrahim", verses: 52, type: "Mekka" },
+      { id: 15, arabic: "الحجر", transliteration: "Al-Hijr", translation: "Hidžr", verses: 99, type: "Mekka" },
+      { id: 16, arabic: "النحل", transliteration: "An-Nahl", translation: "Pčele", verses: 128, type: "Mekka" },
+      { id: 17, arabic: "الإسراء", transliteration: "Al-Isra", translation: "Noćno putovanje", verses: 111, type: "Mekka" },
+      { id: 18, arabic: "الكهف", transliteration: "Al-Kahf", translation: "Pećina", verses: 110, type: "Mekka" },
+      { id: 19, arabic: "مريم", transliteration: "Maryam", translation: "Merjem", verses: 98, type: "Mekka" },
+      { id: 20, arabic: "طه", transliteration: "Ta-Ha", translation: "Ta-Ha", verses: 135, type: "Mekka" },
+      { id: 21, arabic: "الأنبياء", transliteration: "Al-Anbiya", translation: "Vjerovjesnici", verses: 112, type: "Mekka" },
+      { id: 22, arabic: "الحج", transliteration: "Al-Hajj", translation: "Hodočašće", verses: 78, type: "Medina" },
+      { id: 23, arabic: "المؤمنون", transliteration: "Al-Mu'minun", translation: "Vjernici", verses: 118, type: "Mekka" },
+      { id: 24, arabic: "النور", transliteration: "An-Nur", translation: "Svjetlost", verses: 64, type: "Medina" },
+      { id: 25, arabic: "الفرقان", transliteration: "Al-Furqan", translation: "Mjerilo", verses: 77, type: "Mekka" },
+      { id: 26, arabic: "الشعراء", transliteration: "Ash-Shu'ara", translation: "Pjesnici", verses: 227, type: "Mekka" },
+      { id: 27, arabic: "النمل", transliteration: "An-Naml", translation: "Mravi", verses: 93, type: "Mekka" },
+      { id: 28, arabic: "القصص", transliteration: "Al-Qasas", translation: "Kazivanja", verses: 88, type: "Mekka" },
+      { id: 29, arabic: "العنكبوت", transliteration: "Al-'Ankabut", translation: "Pauk", verses: 69, type: "Mekka" },
+      { id: 30, arabic: "الروم", transliteration: "Ar-Rum", translation: "Bizantinci", verses: 60, type: "Mekka" },
+      { id: 31, arabic: "لقمان", transliteration: "Luqman", translation: "Lukman", verses: 34, type: "Mekka" },
+      { id: 32, arabic: "السجدة", transliteration: "As-Sajdah", translation: "Sedžda", verses: 30, type: "Mekka" },
+      { id: 33, arabic: "الأحزاب", transliteration: "Al-Ahzab", translation: "Saveznici", verses: 73, type: "Medina" },
+      { id: 34, arabic: "سبأ", transliteration: "Saba", translation: "Saba", verses: 54, type: "Mekka" },
+      { id: 35, arabic: "فاطر", transliteration: "Fatir", translation: "Stvoritelj", verses: 45, type: "Mekka" },
+      { id: 36, arabic: "يس", transliteration: "Ya-Sin", translation: "Ja-Sin", verses: 83, type: "Mekka" },
+      { id: 37, arabic: "الصافات", transliteration: "As-Saffat", translation: "Poredani", verses: 182, type: "Mekka" },
+      { id: 38, arabic: "ص", transliteration: "Sad", translation: "Sad", verses: 88, type: "Mekka" },
+      { id: 39, arabic: "الزمر", transliteration: "Az-Zumar", translation: "Skupine", verses: 75, type: "Mekka" },
+      { id: 40, arabic: "غافر", transliteration: "Ghafir", translation: "Koji prašta", verses: 85, type: "Mekka" },
+      { id: 41, arabic: "فصلت", transliteration: "Fussilat", translation: "Objašnjeni", verses: 54, type: "Mekka" },
+      { id: 42, arabic: "الشورى", transliteration: "Ash-Shura", translation: "Dogovaranje", verses: 53, type: "Mekka" },
+      { id: 43, arabic: "الزخرف", transliteration: "Az-Zukhruf", translation: "Ukrasi", verses: 89, type: "Mekka" },
+      { id: 44, arabic: "الدخان", transliteration: "Ad-Dukhan", translation: "Dim", verses: 59, type: "Mekka" },
+      { id: 45, arabic: "الجاثية", transliteration: "Al-Jathiyah", translation: "Koji kleče", verses: 37, type: "Mekka" },
+      { id: 46, arabic: "الأحقاف", transliteration: "Al-Ahqaf", translation: "Ahkaf", verses: 35, type: "Mekka" },
+      { id: 47, arabic: "محمد", transliteration: "Muhammad", translation: "Muhammad", verses: 38, type: "Medina" },
+      { id: 48, arabic: "الفتح", transliteration: "Al-Fath", translation: "Pobjeda", verses: 29, type: "Medina" },
+      { id: 49, arabic: "الحجرات", transliteration: "Al-Hujurat", translation: "Sobe", verses: 18, type: "Medina" },
+      { id: 50, arabic: "ق", transliteration: "Qaf", translation: "Kaf", verses: 45, type: "Mekka" },
+      { id: 51, arabic: "الذاريات", transliteration: "Adh-Dhariyat", translation: "Koji raspršuju", verses: 60, type: "Mekka" },
+      { id: 52, arabic: "الطور", transliteration: "At-Tur", translation: "Gora", verses: 49, type: "Mekka" },
+      { id: 53, arabic: "النجم", transliteration: "An-Najm", translation: "Zvijezda", verses: 62, type: "Mekka" },
+      { id: 54, arabic: "القمر", transliteration: "Al-Qamar", translation: "Mjesec", verses: 55, type: "Mekka" },
+      { id: 55, arabic: "الرحمن", transliteration: "Ar-Rahman", translation: "Milostivi", verses: 78, type: "Medina" },
+      { id: 56, arabic: "الواقعة", transliteration: "Al-Waqi'ah", translation: "Događaj", verses: 96, type: "Mekka" },
+      { id: 57, arabic: "الحديد", transliteration: "Al-Hadid", translation: "Gvožđe", verses: 29, type: "Medina" },
+      { id: 58, arabic: "المجادلة", transliteration: "Al-Mujadila", translation: "Rasprava", verses: 22, type: "Medina" },
+      { id: 59, arabic: "الحشر", transliteration: "Al-Hashr", translation: "Progon", verses: 24, type: "Medina" },
+      { id: 60, arabic: "الممتحنة", transliteration: "Al-Mumtahanah", translation: "Provjerena", verses: 13, type: "Medina" },
+      { id: 61, arabic: "الصف", transliteration: "As-Saff", translation: "Bojni red", verses: 14, type: "Medina" },
+      { id: 62, arabic: "الجمعة", transliteration: "Al-Jumu'ah", translation: "Petak", verses: 11, type: "Medina" },
+      { id: 63, arabic: "المنافقون", transliteration: "Al-Munafiqun", translation: "Licemjeri", verses: 11, type: "Medina" },
+      { id: 64, arabic: "التغابن", transliteration: "At-Taghabun", translation: "Samoobmana", verses: 18, type: "Medina" },
+      { id: 65, arabic: "الطلاق", transliteration: "At-Talaq", translation: "Razvod", verses: 12, type: "Medina" },
+      { id: 66, arabic: "التحريم", transliteration: "At-Tahrim", translation: "Zabrana", verses: 12, type: "Medina" },
+      { id: 67, arabic: "الملك", transliteration: "Al-Mulk", translation: "Vlast", verses: 30, type: "Mekka" },
+      { id: 68, arabic: "القلم", transliteration: "Al-Qalam", translation: "Pera", verses: 52, type: "Mekka" },
+      { id: 69, arabic: "الحاقة", transliteration: "Al-Haqqah", translation: "Neizbježni čas", verses: 52, type: "Mekka" },
+      { id: 70, arabic: "المعارج", transliteration: "Al-Ma'arij", translation: "Stepeni", verses: 44, type: "Mekka" },
+      { id: 71, arabic: "نوح", transliteration: "Nuh", translation: "Nuh", verses: 28, type: "Mekka" },
+      { id: 72, arabic: "الجن", transliteration: "Al-Jinn", translation: "Džini", verses: 28, type: "Mekka" },
+      { id: 73, arabic: "المزمل", transliteration: "Al-Muzzammil", translation: "Umotani", verses: 20, type: "Mekka" },
+      { id: 74, arabic: "المدثر", transliteration: "Al-Muddaththir", translation: "Pokriveni", verses: 56, type: "Mekka" },
+      { id: 75, arabic: "القيامة", transliteration: "Al-Qiyamah", translation: "Smak svijeta", verses: 40, type: "Mekka" },
+      { id: 76, arabic: "الإنسان", transliteration: "Al-Insan", translation: "Čovjek", verses: 31, type: "Medina" },
+      { id: 77, arabic: "المرسلات", transliteration: "Al-Mursalat", translation: "Poslani", verses: 50, type: "Mekka" },
+      { id: 78, arabic: "النبأ", transliteration: "An-Naba", translation: "Vijest", verses: 40, type: "Mekka" },
+      { id: 79, arabic: "النازعات", transliteration: "An-Nazi'at", translation: "Koji čupaju", verses: 46, type: "Mekka" },
+      { id: 80, arabic: "عبس", transliteration: "'Abasa", translation: "Namrštio se", verses: 42, type: "Mekka" },
+      { id: 81, arabic: "التكوير", transliteration: "At-Takwir", translation: "Prestanak sjaja", verses: 29, type: "Mekka" },
+      { id: 82, arabic: "الانفطار", transliteration: "Al-Infitar", translation: "Rascepljenje", verses: 19, type: "Mekka" },
+      { id: 83, arabic: "المطففين", transliteration: "Al-Mutaffifin", translation: "Koji pri mjerenju zakidaju", verses: 36, type: "Mekka" },
+      { id: 84, arabic: "الانشقاق", transliteration: "Al-Inshiqaq", translation: "Pucanje", verses: 25, type: "Mekka" },
+      { id: 85, arabic: "البروج", transliteration: "Al-Buruj", translation: "Sazviježđa", verses: 22, type: "Mekka" },
+      { id: 86, arabic: "الطارق", transliteration: "At-Tariq", translation: "Danica", verses: 17, type: "Mekka" },
+      { id: 87, arabic: "الأعلى", transliteration: "Al-A'la", translation: "Svevišnji", verses: 19, type: "Mekka" },
+      { id: 88, arabic: "الغاشية", transliteration: "Al-Ghashiyah", translation: "Teška nevolja", verses: 26, type: "Mekka" },
+      { id: 89, arabic: "الفجر", transliteration: "Al-Fajr", translation: "Zora", verses: 30, type: "Mekka" },
+      { id: 90, arabic: "البلد", transliteration: "Al-Balad", translation: "Grad", verses: 20, type: "Mekka" },
+      { id: 91, arabic: "الشمس", transliteration: "Ash-Shams", translation: "Sunce", verses: 15, type: "Mekka" },
+      { id: 92, arabic: "الليل", transliteration: "Al-Layl", translation: "Noć", verses: 21, type: "Mekka" },
+      { id: 93, arabic: "الضحى", transliteration: "Ad-Duha", translation: "Jutro", verses: 11, type: "Mekka" },
+      { id: 94, arabic: "الشرح", transliteration: "Ash-Sharh", translation: "Prostranost", verses: 8, type: "Mekka" },
+      { id: 95, arabic: "التين", transliteration: "At-Tin", translation: "Smokva", verses: 8, type: "Mekka" },
+      { id: 96, arabic: "العلق", transliteration: "Al-'Alaq", translation: "Ugrušak", verses: 19, type: "Mekka" },
+      { id: 97, arabic: "القدر", transliteration: "Al-Qadr", translation: "Noć Kadr", verses: 5, type: "Mekka" },
+      { id: 98, arabic: "البينة", transliteration: "Al-Bayyinah", translation: "Jasni dokaz", verses: 8, type: "Medina" },
+      { id: 99, arabic: "الزلزلة", transliteration: "Az-Zalzalah", translation: "Zemljotres", verses: 8, type: "Medina" },
+      { id: 100, arabic: "العاديات", transliteration: "Al-'Adiyat", translation: "Koji jure", verses: 11, type: "Mekka" },
+      { id: 101, arabic: "القارعة", transliteration: "Al-Qari'ah", translation: "Smak svijeta", verses: 11, type: "Mekka" },
+      { id: 102, arabic: "التكاثر", transliteration: "At-Takathur", translation: "Nadmetanje", verses: 8, type: "Mekka" },
+      { id: 103, arabic: "العصر", transliteration: "Al-'Asr", translation: "Vrijeme", verses: 3, type: "Mekka" },
+      { id: 104, arabic: "الهمزة", transliteration: "Al-Humazah", translation: "Klevetnik", verses: 9, type: "Mekka" },
+      { id: 105, arabic: "الفيل", transliteration: "Al-Fil", translation: "Slon", verses: 5, type: "Mekka" },
+      { id: 106, arabic: "قريش", transliteration: "Quraysh", translation: "Kurejšije", verses: 4, type: "Mekka" },
+      { id: 107, arabic: "الماعون", transliteration: "Al-Ma'un", translation: "Davanja", verses: 7, type: "Mekka" },
+      { id: 108, arabic: "الكوثر", transliteration: "Al-Kawthar", translation: "Kevser", verses: 3, type: "Mekka" },
+      { id: 109, arabic: "الكافرون", transliteration: "Al-Kafirun", translation: "Nevjernici", verses: 6, type: "Mekka" },
+      { id: 110, arabic: "النصر", transliteration: "An-Nasr", translation: "Pomoć", verses: 3, type: "Medina" },
+      { id: 111, arabic: "المسد", transliteration: "Al-Masad", translation: "Plamen", verses: 5, type: "Mekka" },
+      { id: 112, arabic: "الإخلاص", transliteration: "Al-Ikhlas", translation: "Iskrenost", verses: 4, type: "Mekka" },
+      { id: 113, arabic: "الفلق", transliteration: "Al-Falaq", translation: "Svitanje", verses: 5, type: "Mekka" },
+      { id: 114, arabic: "الناس", transliteration: "An-Nas", translation: "Ljudi", verses: 6, type: "Mekka" }
+    ];
+
+    const RECITERS = {
+      mishary: "https://download.quranicaudio.com/quran/mishari_rashid_al_afasy/",
+      abdulbasit: "https://download.quranicaudio.com/quran/abdul_basit_murattal/",
+      ghamdi: "https://download.quranicaudio.com/quran/sa'd_al-ghamdi/complete/",
+      local: "./audio/"
+    };
+
+    let currentSurahIndex = 0;
+    let selectedReciter = 'mishary';
+    let isPlaying = false;
+
+    const audioEl = document.getElementById('audio-element');
+    const listEl = document.getElementById('surah-list');
+
+    document.addEventListener('DOMContentLoaded', () => {
+      renderSurahList();
+      loadSurah(0, false);
+    });
+
+    function renderSurahList() {
+      listEl.innerHTML = '';
+      SURAHS.forEach((s, idx) => {
+        const isActive = idx === currentSurahIndex;
+        const card = document.createElement('div');
+        card.className = `surah-card ${isActive ? 'active' : ''}`;
+        card.onclick = () => loadSurah(idx, true);
+        card.innerHTML = `
+          <div class="card-left">
+            <div class="surah-num">${s.id}</div>
+            <div class="surah-meta">
+              <div class="surah-title-latin">${s.transliteration}</div>
+              <div class="surah-translation">${s.translation}</div>
+            </div>
+          </div>
+          <div class="card-right">
+            <div class="surah-arabic-name">${s.arabic}</div>
+            <div class="surah-info-pill">${s.verses} ajeta</div>
+          </div>
+        `;
+        listEl.appendChild(card);
+      });
+    }
+
+    function loadSurah(index, autoPlay = true) {
+      currentSurahIndex = index;
+      const s = SURAHS[index];
+      document.getElementById('hero-num').textContent = `SURA ${String(s.id).padStart(3, '0')}`;
+      document.getElementById('hero-arabic').textContent = s.arabic;
+      document.getElementById('hero-translit').textContent = s.transliteration;
+      document.getElementById('hero-trans').textContent = s.translation;
+      document.getElementById('tag-type').textContent = s.type;
+      document.getElementById('tag-verses').textContent = `${s.verses} ajeta`;
+
+      document.getElementById('mini-arabic').textContent = s.arabic;
+      document.getElementById('mini-title').textContent = `${s.id}. ${s.transliteration}`;
+      document.getElementById('mini-sub').textContent = s.translation;
+
+      const numStr = String(s.id).padStart(3, '0');
+      audioEl.src = selectedReciter === 'local' ? `./audio/${numStr}.mp3` : `${RECITERS[selectedReciter]}${numStr}.mp3`;
+      
+      renderSurahList();
+      if (autoPlay) playAudio();
+    }
+
+    function playAudio() {
+      audioEl.play().then(() => {
+        isPlaying = true;
+        document.getElementById('btn-play-main').textContent = '⏸';
+      }).catch(() => {
+        if (selectedReciter === 'local') {
+          selectedReciter = 'mishary';
+          loadSurah(currentSurahIndex, true);
+        }
+      });
+    }
+
+    function togglePlayPause() {
+      if (isPlaying) {
+        audioEl.pause();
+        isPlaying = false;
+        document.getElementById('btn-play-main').textContent = '▶';
+      } else {
+        playAudio();
+      }
+    }
+
+    function playNextSurah() {
+      if (currentSurahIndex < SURAHS.length - 1) loadSurah(currentSurahIndex + 1, true);
+    }
+
+    function playPrevSurah() {
+      if (currentSurahIndex > 0) loadSurah(currentSurahIndex - 1, true);
+    }
+  </script>
+</body>
+</html>

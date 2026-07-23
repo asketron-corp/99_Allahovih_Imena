@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#072215" />
+      <stop offset="50%" stop-color="#0d3c26" />
+      <stop offset="100%" stop-color="#165337" />
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f3e0aa" />
+      <stop offset="50%" stop-color="#d4af37" />
+      <stop offset="100%" stop-color="#aa8514" />
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#000" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  
+  <!-- Base Container -->
+  <rect width="512" height="512" rx="120" fill="url(#bgGrad)" />
+  
+  <!-- Outer Gold Border Frame -->
+  <rect x="24" y="24" width="464" height="464" rx="100" fill="none" stroke="url(#goldGrad)" stroke-width="6" opacity="0.6"/>
+  
+  <!-- Geometric Islamic Star Background -->
+  <g stroke="url(#goldGrad)" stroke-width="2" fill="none" opacity="0.25">
+    <rect x="136" y="136" width="240" height="240" rx="12"/>
+    <rect x="136" y="136" width="240" height="240" rx="12" transform="rotate(45 256 256)"/>
+    <circle cx="256" cy="256" r="150" />
+    <circle cx="256" cy="256" r="180" stroke-dasharray="6 6"/>
+  </g>
+  
+  <!-- Outer Gold Circle -->
+  <circle cx="256" cy="256" r="195" fill="none" stroke="url(#goldGrad)" stroke-width="12" filter="url(#shadow)"/>
+  <circle cx="256" cy="256" r="182" fill="none" stroke="url(#goldGrad)" stroke-width="2" stroke-dasharray="4 8" opacity="0.8"/>
+
+  <!-- Audio Waveform + Headphones / Quran Symbol -->
+  <g transform="translate(0, -10)">
+    <!-- Audio Wave Lines -->
+    <path d="M 120 256 Q 135 210 150 256 T 180 256 T 210 256 T 240 256 T 270 256 T 300 256 T 330 256 T 360 256 T 390 256" fill="none" stroke="url(#goldGrad)" stroke-width="4" opacity="0.3"/>
+    
+    <!-- Arabic Calligraphy "القرآن الكريم" -->
+    <text x="256" y="285" font-family="'Amiri', 'Traditional Arabic', serif" font-size="96" font-weight="bold" fill="url(#goldGrad)" text-anchor="middle" filter="url(#shadow)">القرآن</text>
+  </g>
+  
+  <!-- Speaker / Audio Icon at bottom -->
+  <g transform="translate(256, 375)" fill="url(#goldGrad)">
+    <path d="M -24 0 L -12 0 L 0 -12 L 0 12 L -12 0 Z"/>
+    <path d="M 6 -10 A 14 14 0 0 1 6 10" fill="none" stroke="url(#goldGrad)" stroke-width="4" stroke-linecap="round"/>
+    <path d="M 14 -18 A 24 24 0 0 1 14 18" fill="none" stroke="url(#goldGrad)" stroke-width="4" stroke-linecap="round"/>
+  </g>
+</svg>
