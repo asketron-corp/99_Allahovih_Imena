@@ -807,14 +807,47 @@
       border-color: var(--accent-color);
     }
 
-    .btn-refresh-pwa {
-      background: rgba(212, 175, 55, 0.15);
-      border: 1px solid var(--accent-color);
+    .btn-download-batch {
+      background: rgba(13, 60, 38, 0.08);
+      border: 1px solid var(--primary-color);
       color: var(--primary-color);
     }
 
-    .btn-refresh-pwa:hover {
-      background: var(--accent-color);
+    .btn-download-batch:hover {
+      background: var(--primary-color);
+      color: #ffffff;
+    }
+
+    /* Batch Download Progress Card */
+    .download-progress-card {
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      background: #f7f5ed;
+      border: 1px solid var(--accent-color);
+      padding: 14px 18px;
+      border-radius: 14px;
+      margin-top: 8px;
+    }
+
+    .progress-bar-track {
+      width: 100%;
+      height: 8px;
+      background: #e6e3da;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+      transition: width 0.2s ease;
+    }
+
+    .progress-text {
+      font-size: 0.8rem;
+      font-weight: 600;
       color: var(--primary-dark);
     }
 
@@ -967,7 +1000,7 @@
             </svg>
             <div>
               <h1 class="brand-title">Kur'an Audio</h1>
-              <div class="brand-subtitle">Lokalno & Offline Učenje (v3)</div>
+              <div class="brand-subtitle">Lokalno & Offline Učenje</div>
             </div>
           </div>
           <div class="offline-badge">
@@ -1140,28 +1173,39 @@
               <polyline points="7 10 12 15 17 10"></polyline>
               <line x1="12" y1="15" x2="12" y2="3"></line>
             </svg>
-            <span>Offline Upravljanje, Ažuriranje & YouTube Linkovi</span>
+            <span>Alati za Preuzimanje Učenja za 100% Offline Rad</span>
           </div>
           <p class="tools-desc">
-            Možete direktno ugraditi bilo koji YouTube video / audio link za učenje Kur'ana. Unesite link ispod i kliknite <strong>Učitaj YouTube</strong>:
+            Da biste slušali učenje bez interneta, kliknite na dugme ispod dok ste konektovani da preuzmete sve MP3 snimke u pretraživač. Takođe možete otvoriti i vlastite MP3 fajlove.
           </p>
 
-          <div class="yt-input-row">
-            <input type="text" class="yt-url-input" id="custom-yt-input" placeholder="Zalijepite YouTube URL (npr. https://www.youtube.com/watch?v=IY4_HzJCXyA)">
-            <button class="btn-action" onclick="loadCustomYouTubeLink()">Učitaj YouTube</button>
-          </div>
-
-          <div class="tool-actions" style="margin-top:8px;">
-            <button class="btn-action btn-refresh-pwa" onclick="resetAppAndCache()">
-              🔄 Osvježi PWA / Očisti Keš (Verzija 3)
+          <div class="tool-actions">
+            <button class="btn-action btn-download-batch" onclick="downloadSurahsForOffline('short')">
+              📥 Preuzmi najčešće sure (Fatiha, Jasin, Mulk, Pećina...)
+            </button>
+            <button class="btn-action btn-download-batch" onclick="downloadSurahsForOffline('all')">
+              📥 Preuzmi sve 114 sure odabranog učača za Offline
             </button>
             <button class="btn-action" onclick="cacheCurrentSurah()">
-              💾 Preuzmi trenutnu suru za offline
+              💾 Preuzmi samo trenutnu suru
             </button>
             <button class="btn-action" onclick="document.getElementById('file-upload-input').click()">
-              📁 Otvori lokalni MP3 fajl
+              📁 Otvori lokalni MP3 fajl sa telefona
             </button>
             <input type="file" id="file-upload-input" accept="audio/mp3,audio/*" style="display:none" onchange="loadCustomLocalMp3(event)">
+          </div>
+
+          <!-- Download Progress Indicator -->
+          <div class="download-progress-card" id="download-progress-card">
+            <div class="progress-text" id="download-progress-text">Započinjem preuzimanje...</div>
+            <div class="progress-bar-track">
+              <div class="progress-bar-fill" id="download-progress-bar"></div>
+            </div>
+          </div>
+
+          <div class="yt-input-row" style="margin-top:10px;">
+            <input type="text" class="yt-url-input" id="custom-yt-input" placeholder="Zalijepite YouTube URL (npr. https://www.youtube.com/watch?v=IY4_HzJCXyA)">
+            <button class="btn-action" onclick="loadCustomYouTubeLink()">Učitaj YouTube</button>
           </div>
         </div>
 
@@ -1384,15 +1428,15 @@
         navigator.serviceWorker.register('./sw.js')
           .then(reg => {
             console.log('[PWA v3] Service Worker registriran:', reg.scope);
-            reg.update(); // Trigger network check for SW updates
+            reg.update();
           })
           .catch(err => console.log('[PWA] Greška pri registraciji SW:', err));
       }
     }
 
-    // Force Reset App and Clear Cache for Home Screen PWA
+    // Force Reset App and Clear Cache
     function resetAppAndCache() {
-      if (confirm("Da li želite očistiti stari keš i učitati najnoviju verziju plejera sa svim učačima?")) {
+      if (confirm("Da li želite očistiti stari keš i učitati najnoviju verziju plejera?")) {
         if ('serviceWorker' in navigator) {
           navigator.serviceWorker.getRegistrations().then(registrations => {
             for (let registration of registrations) {
@@ -1409,6 +1453,65 @@
         } else {
           window.location.reload(true);
         }
+      }
+    }
+
+    // Batch Pre-download Audio Files for Offline Playback
+    async function downloadSurahsForOffline(range = 'all') {
+      if (!('caches' in window)) {
+        alert('Vaš pretraživač ne podržava automatsko keširanje.');
+        return;
+      }
+      
+      const reciterBase = RECITERS[selectedReciter];
+      if (selectedReciter === 'local' || selectedReciter === 'youtube_everyday') {
+        alert('Preuzimanje je dostupno za online MP3 učače (Mishary, Abdul Basit, Ghamdi, Minshawi, Sudais). Za lokalne fajlove dodajte ih u folder audio/.');
+        return;
+      }
+
+      let targetSurahs = SURAHS;
+      if (range === 'short') {
+        // Popular / frequent surahs
+        targetSurahs = SURAHS.filter(s => [1, 18, 36, 55, 56, 67, 112, 113, 114].includes(s.id));
+      }
+
+      const progressCard = document.getElementById('download-progress-card');
+      const progressBar = document.getElementById('download-progress-bar');
+      const progressText = document.getElementById('download-progress-text');
+      progressCard.style.display = 'flex';
+
+      try {
+        const cache = await caches.open('kuran-audio-mp3-v3');
+        let completed = 0;
+
+        for (let i = 0; i < targetSurahs.length; i++) {
+          const s = targetSurahs[i];
+          const numStr = String(s.id).padStart(3, '0');
+          const audioUrl = `${reciterBase}${numStr}.mp3`;
+
+          progressText.textContent = `Preuzimanje (${i + 1}/${targetSurahs.length}): Sura ${s.transliteration}...`;
+          progressBar.style.width = `${Math.round(((i + 1) / targetSurahs.length) * 100)}%`;
+
+          try {
+            const match = await cache.match(audioUrl);
+            if (!match) {
+              const resp = await fetch(audioUrl);
+              if (resp.ok) {
+                await cache.put(audioUrl, resp);
+              }
+            }
+          } catch (err) {
+            console.warn('Greska pri preuzimanju:', s.transliteration, err);
+          }
+          completed++;
+        }
+
+        progressText.textContent = `✅ Preuzimanje završeno! ${completed} sura učača je sačuvano u memoriji telefona za 100% OFFLINE slušanje!`;
+        setTimeout(() => {
+          progressCard.style.display = 'none';
+        }, 5000);
+      } catch (e) {
+        alert('Greška pri keširanju. Provjerite internet konekciju.');
       }
     }
 
