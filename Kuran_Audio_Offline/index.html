@@ -851,6 +851,43 @@
       color: var(--primary-dark);
     }
 
+    /* Toast Notification */
+    .toast-notification {
+      position: fixed;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%) translateY(120px);
+      background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-color) 100%);
+      color: #ffffff;
+      padding: 14px 24px;
+      border-radius: 16px;
+      font-size: 0.88rem;
+      font-weight: 600;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+      z-index: 9999;
+      opacity: 0;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      pointer-events: none;
+      max-width: 90vw;
+      text-align: center;
+      border: 1px solid var(--accent-color);
+    }
+
+    .toast-notification.visible {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+      pointer-events: auto;
+    }
+
+    .toast-notification.error {
+      border-color: #e74c3c;
+      background: linear-gradient(135deg, #5c1a1a 0%, #8b2020 100%);
+    }
+
+    .toast-notification.success {
+      border-color: #2ec4b6;
+    }
+
     /* Mobile Sticky Mini-Player */
     .mini-player {
       display: none;
@@ -1212,6 +1249,9 @@
       </div>
     </main>
   </div>
+
+  <!-- Toast Notification Element -->
+  <div class="toast-notification" id="toast-notification"></div>
 
   <!-- Mobile Sticky Mini Player -->
   <div class="mini-player" id="mini-player">
@@ -1650,7 +1690,11 @@
         updatePlayIcons();
         renderSurahList();
       }).catch(err => {
-        console.warn('Auto-play error or fallback to local audio:', err);
+        console.warn('[Kur\'an Audio] Greška pri reprodukciji:', err);
+        isPlaying = false;
+        updatePlayIcons();
+        renderSurahList();
+        // If local reciter fails, try online Mishary as fallback
         if (selectedReciter === 'local') {
           const numStr = String(SURAHS[currentSurahIndex].id).padStart(3, '0');
           audioEl.src = `${RECITERS['mishary']}${numStr}.mp3`;
@@ -1658,7 +1702,13 @@
             isPlaying = true;
             updatePlayIcons();
             renderSurahList();
+          }).catch(e2 => {
+            console.warn('[Kur\'an Audio] Fallback također nije uspio:', e2);
+            showToast('⚠️ Audio nije dostupan offline. Preuzmite sure dok imate internet!', 'error', 4000);
           });
+        } else {
+          // For all online reciters — show helpful offline message
+          showToast('⚠️ Ova sura nije preuzeta za offline. Spojite se na internet ili preuzmite sure unaprijed!', 'error', 4000);
         }
       });
     }
@@ -1796,6 +1846,18 @@
           playNextSurah();
         }
       });
+
+      // CRITICAL: Catch audio load errors so the app doesn't freeze offline
+      audioEl.addEventListener('error', (e) => {
+        console.warn('[Kur\'an Audio] Audio element error:', e);
+        isPlaying = false;
+        updatePlayIcons();
+        renderSurahList();
+        const s = SURAHS[currentSurahIndex];
+        if (s) {
+          showToast(`⚠️ Ne mogu učitati: ${s.transliteration}. Preuzmite za offline dok imate internet.`, 'error', 4000);
+        }
+      });
     }
 
     function formatTime(sec) {
@@ -1803,6 +1865,19 @@
       const m = Math.floor(sec / 60);
       const s = Math.floor(sec % 60);
       return `${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`;
+    }
+
+    // Toast Notification System
+    let toastTimer = null;
+    function showToast(message, type = 'info', duration = 3000) {
+      const toast = document.getElementById('toast-notification');
+      if (!toast) return;
+      clearTimeout(toastTimer);
+      toast.textContent = message;
+      toast.className = 'toast-notification visible' + (type === 'error' ? ' error' : type === 'success' ? ' success' : '');
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('visible');
+      }, duration);
     }
 
     // Favorites Logic

@@ -947,6 +947,21 @@
     document.addEventListener('DOMContentLoaded', () => {
       renderSurahList();
       loadSurah(0, false);
+
+      // CRITICAL: Catch audio load errors so the app doesn't freeze offline
+      audioEl.addEventListener('error', (e) => {
+        console.warn('[Kur\'an Audio] Audio greška:', e);
+        isPlaying = false;
+        document.getElementById('btn-play-main').textContent = '▶';
+        const s = SURAHS[currentSurahIndex];
+        if (s) {
+          alert('⚠️ Ne mogu učitati: ' + s.transliteration + '. Spojite se na internet za streaming audio.');
+        }
+      });
+
+      audioEl.addEventListener('ended', () => {
+        playNextSurah();
+      });
     });
 
     function renderSurahList() {
@@ -1008,10 +1023,23 @@
       audioEl.play().then(() => {
         isPlaying = true;
         document.getElementById('btn-play-main').textContent = '⏸';
-      }).catch(() => {
+      }).catch((err) => {
+        console.warn('[Kur\'an Audio] Play greška:', err);
+        isPlaying = false;
+        document.getElementById('btn-play-main').textContent = '▶';
         if (selectedReciter === 'local') {
-          selectedReciter = 'mishary';
-          loadSurah(currentSurahIndex, true);
+          // Try Mishary as online fallback, but don't recurse
+          const numStr = String(SURAHS[currentSurahIndex].id).padStart(3, '0');
+          audioEl.src = RECITERS['mishary'] + numStr + '.mp3';
+          audioEl.play().then(() => {
+            isPlaying = true;
+            document.getElementById('btn-play-main').textContent = '⏸';
+          }).catch((e2) => {
+            console.warn('[Kur\'an Audio] Fallback greška:', e2);
+            alert('⚠️ Audio nije dostupan. Spojite se na internet za streaming.');
+          });
+        } else {
+          alert('⚠️ Ova sura nije dostupna offline. Spojite se na internet za streaming učenja.');
         }
       });
     }
