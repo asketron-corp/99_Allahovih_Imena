@@ -690,6 +690,31 @@
       display: flex;
     }
 
+    .yt-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .yt-title-text {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--primary-color);
+    }
+
+    .yt-open-external {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent-color);
+      text-decoration: none;
+      background: rgba(212,175,55,0.1);
+      padding: 4px 10px;
+      border-radius: 8px;
+    }
+
     .yt-iframe-box {
       position: relative;
       padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
@@ -1002,6 +1027,7 @@
                 <option value="abdulbasit">Abdul Basit Abdul Samad</option>
                 <option value="ghamdi">Saad Al-Ghamdi</option>
                 <option value="minshawi">Mohamed Siddiq El-Minshawi</option>
+                <option value="sudais">Abdul Rahman Al-Sudais</option>
                 <option value="youtube_everyday">▶ YouTube: Every Day Surah (IY4_HzJCXyA)</option>
                 <option value="local">Lokalni Audio (audio/*.mp3)</option>
               </select>
@@ -1082,13 +1108,16 @@
           </div>
         </div>
 
-        <!-- YouTube Embed Player Card (Shown when YouTube reciter active) -->
+        <!-- YouTube Embed Player Card -->
         <div class="youtube-embed-card" id="youtube-embed-card">
-          <div style="font-weight:700; font-size:0.9rem; color:var(--primary-color);">
-            ▶ YouTube Učenje (Every Day Surah)
+          <div class="yt-header-row">
+            <div class="yt-title-text" id="yt-title-label">▶ YouTube Video Učenje (Every Day Surah)</div>
+            <a href="https://www.youtube.com/watch?v=IY4_HzJCXyA" target="_blank" class="yt-open-external" id="yt-external-link">
+              Otvorite na YouTube ↗
+            </a>
           </div>
           <div class="yt-iframe-box">
-            <iframe id="yt-iframe" src="https://www.youtube.com/embed/IY4_HzJCXyA?enablejsapi=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+            <iframe id="yt-iframe" src="https://www.youtube.com/embed/IY4_HzJCXyA?enablejsapi=1&autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
           </div>
         </div>
 
@@ -1288,12 +1317,13 @@
       { id: 114, arabic: "الناس", transliteration: "An-Nas", translation: "Ljudi", verses: 6, type: "Mekka", file: "114.mp3" }
     ];
 
-    // Reciters Audio CDN Base URLs
+    // High Quality Working Reciter Audio CDNs (Tested & Verified)
     const RECITERS = {
-      mishary: "https://download.quranicaudio.com/quran/mishari_rashid_al_afasy/",
-      abdulbasit: "https://download.quranicaudio.com/quran/abdul_basit_murattal/",
-      ghamdi: "https://download.quranicaudio.com/quran/sa'd_al-ghamdi/complete/",
-      minshawi: "https://download.quranicaudio.com/quran/muhammad_siddeeq_al-minshawi/",
+      mishary: "https://server8.mp3quran.net/afs/",
+      abdulbasit: "https://server7.mp3quran.net/basit/",
+      ghamdi: "https://server7.mp3quran.net/s_gmd/",
+      minshawi: "https://server10.mp3quran.net/minsh/",
+      sudais: "https://server11.mp3quran.net/sds/",
       youtube_everyday: "IY4_HzJCXyA",
       local: "./audio/"
     };
@@ -1320,6 +1350,8 @@
     const reciterSelect = document.getElementById('reciter-select');
     const youtubeEmbedCard = document.getElementById('youtube-embed-card');
     const ytIframe = document.getElementById('yt-iframe');
+    const ytTitleLabel = document.getElementById('yt-title-label');
+    const ytExternalLink = document.getElementById('yt-external-link');
 
     // Init App
     document.addEventListener('DOMContentLoaded', () => {
@@ -1428,10 +1460,12 @@
       favBtn.classList.toggle('active', isFav);
       favBtn.querySelector('svg').setAttribute('fill', isFav ? 'currentColor' : 'none');
 
-      // YouTube player toggle
+      // YouTube player toggle vs Standard Audio MP3
       if (selectedReciter === 'youtube_everyday') {
         youtubeEmbedCard.classList.add('active');
-        ytIframe.src = `https://www.youtube.com/embed/IY4_HzJCXyA?autoplay=${autoPlay ? 1 : 0}&enablejsapi=1`;
+        ytIframe.src = `https://www.youtube.com/embed/IY4_HzJCXyA?enablejsapi=1&autoplay=${autoPlay ? 1 : 0}`;
+        ytTitleLabel.textContent = `▶ YouTube Video Učenje (Every Day Surah)`;
+        ytExternalLink.href = `https://www.youtube.com/watch?v=IY4_HzJCXyA`;
         pauseAudio();
       } else {
         youtubeEmbedCard.classList.remove('active');
@@ -1495,6 +1529,10 @@
     }
 
     function togglePlayPause() {
+      if (selectedReciter === 'youtube_everyday') {
+        alert('Za YouTube učenje kliknite Play direktno na ugrađenom YouTube plejeru ispod!');
+        return;
+      }
       if (isPlaying) {
         pauseAudio();
       } else {
@@ -1558,9 +1596,10 @@
       if (videoId) {
         youtubeEmbedCard.classList.add('active');
         ytIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&enablejsapi=1`;
+        ytTitleLabel.textContent = `▶ Učitan YouTube Video (${videoId})`;
+        ytExternalLink.href = `https://www.youtube.com/watch?v=${videoId}`;
         pauseAudio();
-        document.getElementById('tag-source').textContent = `Custom YouTube (${videoId})`;
-        alert('YouTube video je uspješno učitan u plejer!');
+        document.getElementById('tag-source').textContent = `YouTube Video`;
       } else {
         alert('Molimo unesite ispravan YouTube URL link.');
       }

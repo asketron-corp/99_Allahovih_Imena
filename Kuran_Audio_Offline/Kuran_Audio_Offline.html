@@ -570,6 +570,64 @@
       cursor: pointer;
     }
 
+    .youtube-embed-card {
+      display: none;
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 20px;
+      box-shadow: var(--shadow-md);
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .youtube-embed-card.active {
+      display: flex;
+    }
+
+    .yt-header-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .yt-title-text {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--primary-color);
+    }
+
+    .yt-open-external {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent-color);
+      text-decoration: none;
+      background: rgba(212,175,55,0.1);
+      padding: 4px 10px;
+      border-radius: 8px;
+    }
+
+    .yt-iframe-box {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+      height: 0;
+      overflow: hidden;
+      border-radius: 12px;
+      background: #000;
+    }
+
+    .yt-iframe-box iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
     .mini-player {
       display: none;
       position: fixed;
@@ -639,6 +697,10 @@
           </div>
         </div>
 
+        <a href="../index.html" style="display:flex; align-items:center; justify-content:center; gap:8px; background:rgba(212,175,55,0.2); border:1px solid var(--accent-color); color:#f3e0aa; padding:7px 14px; border-radius:12px; text-decoration:none; font-size:0.82rem; font-weight:700; transition:0.2s;">
+          ✨ Povratak na 99 Allahovih Imena ➔
+        </a>
+
         <div class="search-box">
           <svg class="search-icon-svg" viewBox="0 0 24 24">
             <circle cx="11" cy="11" r="8" stroke-width="2.5"></circle>
@@ -683,8 +745,11 @@
               <span class="reciter-label">Učač:</span>
               <select class="reciter-select" id="reciter-select" onchange="changeReciter(this.value)">
                 <option value="mishary">Mishary Rashid Alafasy</option>
-                <option value="abdulbasit">Abdul Basit</option>
+                <option value="abdulbasit">Abdul Basit Abdul Samad</option>
                 <option value="ghamdi">Saad Al-Ghamdi</option>
+                <option value="minshawi">Mohamed Siddiq El-Minshawi</option>
+                <option value="sudais">Abdul Rahman Al-Sudais</option>
+                <option value="youtube_everyday">▶ YouTube: Every Day Surah (IY4_HzJCXyA)</option>
                 <option value="local">Lokalni Audio (audio/*.mp3)</option>
               </select>
             </div>
@@ -709,6 +774,20 @@
             <div class="repeat-badge" id="repeat-badge" onclick="cycleRepeat()">Ponavljanje: Isključeno</div>
           </div>
         </div>
+
+        <!-- YouTube Embed Player Card -->
+        <div class="youtube-embed-card" id="youtube-embed-card">
+          <div class="yt-header-row">
+            <div class="yt-title-text" id="yt-title-label">▶ YouTube Video Učenje (Every Day Surah)</div>
+            <a href="https://www.youtube.com/watch?v=IY4_HzJCXyA" target="_blank" class="yt-open-external" id="yt-external-link">
+              Otvorite na YouTube ↗
+            </a>
+          </div>
+          <div class="yt-iframe-box">
+            <iframe id="yt-iframe" src="https://www.youtube.com/embed/IY4_HzJCXyA?enablejsapi=1&autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+          </div>
+        </div>
+
       </div>
     </main>
   </div>
@@ -845,9 +924,12 @@
     ];
 
     const RECITERS = {
-      mishary: "https://download.quranicaudio.com/quran/mishari_rashid_al_afasy/",
-      abdulbasit: "https://download.quranicaudio.com/quran/abdul_basit_murattal/",
-      ghamdi: "https://download.quranicaudio.com/quran/sa'd_al-ghamdi/complete/",
+      mishary: "https://server8.mp3quran.net/afs/",
+      abdulbasit: "https://server7.mp3quran.net/basit/",
+      ghamdi: "https://server7.mp3quran.net/s_gmd/",
+      minshawi: "https://server10.mp3quran.net/minsh/",
+      sudais: "https://server11.mp3quran.net/sds/",
+      youtube_everyday: "IY4_HzJCXyA",
       local: "./audio/"
     };
 
@@ -857,6 +939,10 @@
 
     const audioEl = document.getElementById('audio-element');
     const listEl = document.getElementById('surah-list');
+    const youtubeEmbedCard = document.getElementById('youtube-embed-card');
+    const ytIframe = document.getElementById('yt-iframe');
+    const ytTitleLabel = document.getElementById('yt-title-label');
+    const ytExternalLink = document.getElementById('yt-external-link');
 
     document.addEventListener('DOMContentLoaded', () => {
       renderSurahList();
@@ -901,14 +987,24 @@
       document.getElementById('mini-title').textContent = `${s.id}. ${s.transliteration}`;
       document.getElementById('mini-sub').textContent = s.translation;
 
-      const numStr = String(s.id).padStart(3, '0');
-      audioEl.src = selectedReciter === 'local' ? `./audio/${numStr}.mp3` : `${RECITERS[selectedReciter]}${numStr}.mp3`;
+      if (selectedReciter === 'youtube_everyday') {
+        youtubeEmbedCard.classList.add('active');
+        ytIframe.src = `https://www.youtube.com/embed/IY4_HzJCXyA?enablejsapi=1&autoplay=${autoPlay ? 1 : 0}`;
+        ytTitleLabel.textContent = `▶ YouTube Video Učenje (Every Day Surah)`;
+        ytExternalLink.href = `https://www.youtube.com/watch?v=IY4_HzJCXyA`;
+        pauseAudio();
+      } else {
+        youtubeEmbedCard.classList.remove('active');
+        const numStr = String(s.id).padStart(3, '0');
+        audioEl.src = selectedReciter === 'local' ? `./audio/${numStr}.mp3` : `${RECITERS[selectedReciter]}${numStr}.mp3`;
+        if (autoPlay) playAudio();
+      }
       
       renderSurahList();
-      if (autoPlay) playAudio();
     }
 
     function playAudio() {
+      if (selectedReciter === 'youtube_everyday') return;
       audioEl.play().then(() => {
         isPlaying = true;
         document.getElementById('btn-play-main').textContent = '⏸';
@@ -920,11 +1016,19 @@
       });
     }
 
+    function pauseAudio() {
+      audioEl.pause();
+      isPlaying = false;
+      document.getElementById('btn-play-main').textContent = '▶';
+    }
+
     function togglePlayPause() {
+      if (selectedReciter === 'youtube_everyday') {
+        alert('Za YouTube učenje kliknite Play direktno na ugrađenom YouTube plejeru ispod!');
+        return;
+      }
       if (isPlaying) {
-        audioEl.pause();
-        isPlaying = false;
-        document.getElementById('btn-play-main').textContent = '▶';
+        pauseAudio();
       } else {
         playAudio();
       }
@@ -936,6 +1040,11 @@
 
     function playPrevSurah() {
       if (currentSurahIndex > 0) loadSurah(currentSurahIndex - 1, true);
+    }
+
+    function changeReciter(r) {
+      selectedReciter = r;
+      loadSurah(currentSurahIndex, true);
     }
   </script>
 </body>
