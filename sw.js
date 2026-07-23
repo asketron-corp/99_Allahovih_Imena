@@ -1,25 +1,124 @@
-const CACHE_NAME = '99-names-cache-v3';
+const CACHE_NAME = '99-names-cache-v4';
 const ASSETS = [
   './',
   './index.html',
   './99_Allahovih_Imena_Offline.html',
   './names.json',
   './manifest.json',
-  './icon.svg'
+  './icon.svg',
+  './audio/1.mp3',
+  './audio/2.mp3',
+  './audio/3.mp3',
+  './audio/4.mp3',
+  './audio/5.mp3',
+  './audio/6.mp3',
+  './audio/7.mp3',
+  './audio/8.mp3',
+  './audio/9.mp3',
+  './audio/10.mp3',
+  './audio/11.mp3',
+  './audio/12.mp3',
+  './audio/13.mp3',
+  './audio/14.mp3',
+  './audio/15.mp3',
+  './audio/16.mp3',
+  './audio/17.mp3',
+  './audio/18.mp3',
+  './audio/19.mp3',
+  './audio/20.mp3',
+  './audio/21.mp3',
+  './audio/22.mp3',
+  './audio/23.mp3',
+  './audio/24.mp3',
+  './audio/25.mp3',
+  './audio/26.mp3',
+  './audio/27.mp3',
+  './audio/28.mp3',
+  './audio/29.mp3',
+  './audio/30.mp3',
+  './audio/31.mp3',
+  './audio/32.mp3',
+  './audio/33.mp3',
+  './audio/34.mp3',
+  './audio/35.mp3',
+  './audio/36.mp3',
+  './audio/37.mp3',
+  './audio/38.mp3',
+  './audio/39.mp3',
+  './audio/40.mp3',
+  './audio/41.mp3',
+  './audio/42.mp3',
+  './audio/43.mp3',
+  './audio/44.mp3',
+  './audio/45.mp3',
+  './audio/46.mp3',
+  './audio/47.mp3',
+  './audio/48.mp3',
+  './audio/49.mp3',
+  './audio/50.mp3',
+  './audio/51.mp3',
+  './audio/52.mp3',
+  './audio/53.mp3',
+  './audio/54.mp3',
+  './audio/55.mp3',
+  './audio/56.mp3',
+  './audio/57.mp3',
+  './audio/58.mp3',
+  './audio/59.mp3',
+  './audio/60.mp3',
+  './audio/61.mp3',
+  './audio/62.mp3',
+  './audio/63.mp3',
+  './audio/64.mp3',
+  './audio/65.mp3',
+  './audio/66.mp3',
+  './audio/67.mp3',
+  './audio/68.mp3',
+  './audio/69.mp3',
+  './audio/70.mp3',
+  './audio/71.mp3',
+  './audio/72.mp3',
+  './audio/73.mp3',
+  './audio/74.mp3',
+  './audio/75.mp3',
+  './audio/76.mp3',
+  './audio/77.mp3',
+  './audio/78.mp3',
+  './audio/79.mp3',
+  './audio/80.mp3',
+  './audio/81.mp3',
+  './audio/82.mp3',
+  './audio/83.mp3',
+  './audio/84.mp3',
+  './audio/85.mp3',
+  './audio/86.mp3',
+  './audio/87.mp3',
+  './audio/88.mp3',
+  './audio/89.mp3',
+  './audio/90.mp3',
+  './audio/91.mp3',
+  './audio/92.mp3',
+  './audio/93.mp3',
+  './audio/94.mp3',
+  './audio/95.mp3',
+  './audio/96.mp3',
+  './audio/97.mp3',
+  './audio/98.mp3',
+  './audio/99.mp3'
 ];
 
-// Install Event - cache assets immediately
+// Install Event
 self.addEventListener('install', (e) => {
   self.skipWaiting();
   e.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      console.log('[Service Worker] Caching app shell and names data v3');
+      console.log('[Service Worker] Caching app shell, names and audio files');
       return cache.addAll(ASSETS);
     })
   );
 });
 
-// Activate Event - purge all old caches
+// Activate Event
 self.addEventListener('activate', (e) => {
   e.waitUntil(
     caches.keys().then((keys) => {
@@ -35,32 +134,16 @@ self.addEventListener('activate', (e) => {
   );
 });
 
-// Fetch Event (Network First for names.json & HTML, Fallback to Cache)
+// Fetch Event (Cache First for Audio/Assets, Fallback to Network)
 self.addEventListener('fetch', (e) => {
-  const url = new URL(e.request.url);
-  
-  if (url.pathname.endsWith('names.json') || url.pathname.endsWith('index.html') || url.pathname.endsWith('/')) {
-    // Network First strategy so updates are immediately reflected when online
-    e.respondWith(
-      fetch(e.request).then((networkResponse) => {
-        if (networkResponse && networkResponse.status === 200) {
-          const responseClone = networkResponse.clone();
-          caches.open(CACHE_NAME).then((cache) => cache.put(e.request, responseClone));
-        }
-        return networkResponse;
-      }).catch(() => {
-        return caches.match(e.request);
-      })
-    );
-  } else {
-    // Cache First for static assets (images, icons, etc.)
-    e.respondWith(
-      caches.match(e.request).then((cachedResponse) => {
-        if (cachedResponse) {
-          return cachedResponse;
-        }
-        return fetch(e.request);
-      })
-    );
-  }
+  e.respondWith(
+    caches.match(e.request).then((cachedResponse) => {
+      if (cachedResponse) {
+        return cachedResponse;
+      }
+      return fetch(e.request);
+    }).catch(() => {
+      console.log('[Service Worker] Offline fallback');
+    })
+  );
 });
